@@ -1,13 +1,32 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
+import React, {useState} from "react";
+import {useNavigate} from 'react-router-dom';
+import axios from 'axios';
 import "./Loginstyle.css";
 
 export default function LoginPage() {
-    let history = useNavigate();
+    let navigate = useNavigate();
 
-    const goToTestPage = () => {
-        history('/testpage');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = () => {
+        axios.get('http://localhost:8080/user/getAllUsers')
+            .then(response => {
+                const users = response.data;
+                const user = users.find(user => user.username === username && user.password === password);
+
+                if (user) {
+                    navigate('/testpage');
+                } else {
+                    alert('Incorrect username or password');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while logging in');
+            });
     };
+
 
     return (
         <div className="login-page">
@@ -21,6 +40,8 @@ export default function LoginPage() {
                                     type="text"
                                     placeholder="Enter username"
                                     className="input-field"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
                                 />
                             </div>
                         </div>
@@ -30,12 +51,14 @@ export default function LoginPage() {
                                     type="password"
                                     placeholder="Enter password"
                                     className="input-field"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                             </div>
                         </div>
                     </div>
                     <div className="div-wrapper">
-                        <button className="overlap-2" onClick={goToTestPage}>
+                        <button className="overlap-2" onClick={handleLogin}>
                             <div className="text-wrapper-3">LOGIN</div>
                         </button>
                     </div>
