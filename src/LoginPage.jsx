@@ -1,7 +1,14 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import "./Loginstyle.css";
 
 export default function LoginPage() {
+    let history = useNavigate();
+
+    const goToTestPage = () => {
+        history('/testpage');
+    };
+
     return (
         <div className="login-page">
             <div className="div">
@@ -28,9 +35,9 @@ export default function LoginPage() {
                         </div>
                     </div>
                     <div className="div-wrapper">
-                        <div className="overlap-2">
+                        <button className="overlap-2" onClick={goToTestPage}>
                             <div className="text-wrapper-3">LOGIN</div>
-                        </div>
+                        </button>
                     </div>
                     <div className="overlap-3">
                         <div className="text-wrapper-4">Don’t have an account?</div>
