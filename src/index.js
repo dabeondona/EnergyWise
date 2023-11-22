@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import LoginPage from './LoginPage';
 import Testpage from './Testpage';
-import TestIndex from './TestIndex';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
