@@ -1,0 +1,140 @@
+.main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center; 
+    flex-grow: 1;
+    padding-bottom: 820px;
+    font-family: "Robot-Medium", Helvetica;
+}
+
+.heading-a {
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-size: 22.5px;  
+    font-weight: 600;
+    padding: 0 150px;
+    color: #04364a;
+    letter-spacing: 1px;
+}
+
+.heading {
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-size: 22.5px;  
+    font-weight: 600;
+    padding: 0 100px;
+    color: #04364a;
+    letter-spacing: 1px;
+}
+
+.regular {
+    color: #04364a;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    margin: 11px; 
+    margin-left: 25px;
+    margin-right: 0px;
+    font-family: "Robot-Regular", Helvetica;
+    font-weight: 500;
+    letter-spacing: 0.9px;
+}
+
+.regular-button {
+    color: #04364a;
+    background: none; 
+    border: none;
+    text-decoration: underline;
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 30px;
+    margin: 11px; 
+    font-family: "Robot-SemiBold", Helvetica;
+    font-weight: 600;
+    letter-spacing: 0.9px;
+    cursor: pointer;
+}
+
+.components {
+    display: grid;
+
+}
+
+.input-field {
+    background-color: #ffffff;
+    padding: 10px; 
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border: none;
+    margin: 11px; 
+    margin-left: 40px;
+    border-radius: 25px;
+    font-family: "Roboto-Bold", Helvetica;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    width: 350px;
+  }
+
+.input-field:focus {
+    background-color: #ffffff;
+}
+
+.input-field:valid {
+    background-color: #ffffff;
+}
+
+.button {
+    background-color: #73d2f8;
+    margin-left: 22.5px;
+    border-style: none;
+    border-radius: 25px;
+    margin-left: 50px;
+    cursor: pointer;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    padding: 10px; 
+    padding-left: 30px;
+    height: 67px;
+    position: relative;
+    width: 374px;
+    font-family: "Roboto-Bold", Helvetica;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 600;
+    box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07)
+    ;
+}
+
+
+.signin {
+    background-color:#F5FCFF;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 340px;
+    margin-left: 30px;
+    margin-bottom: 0px;
+}
+
+.logo-energywise {
+    object-fit: cover;
+    padding: 100px;
+}
+
+.bottom-signin {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    gap: 0px;
+}
