@@ -119,12 +119,13 @@
     font-size: 20px;
     font-weight: 600;
     box-shadow:
-    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
-    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
-    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
-    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
-    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
-    100px 100px 80px rgba(0, 0, 0, 0.07)
+    2.1px 2.3px 3.6px rgba(0, 0, 0, 0.036),
+    4.8px 5.4px 8.5px rgba(0, 0, 0, 0.052),
+    8.6px 9.7px 15.2px rgba(0, 0, 0, 0.064),
+    14.3px 16.1px 25.2px rgba(0, 0, 0, 0.076),
+    23.5px 26.5px 41.5px rgba(0, 0, 0, 0.088),
+    41.1px 46.2px 72.6px rgba(0, 0, 0, 0.104),
+    89px 100px 157px rgba(0, 0, 0, 0.14)
     ;
 }
 
