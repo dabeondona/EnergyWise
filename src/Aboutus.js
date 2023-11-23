@@ -1,8 +1,15 @@
 import React from "react";
 import { Group } from "./Group";
+import { useNavigate } from "react-router-dom";
 import "./App.css";
+import "./Aboutus.css";
 
 const App = () => {
+  let navigate = useNavigate();
+
+  const loginpage = () => {
+    navigate("/")
+  }
   return (
     <div className="about-us">
       <div className="div">
@@ -14,7 +21,7 @@ const App = () => {
               <button className="text-wrapper-4">PRICING</button>
               <img className="line" alt="Line" src="line-53.png" />
               <div className="group-3">
-                <button className="text-wrapper-5">LOG IN</button>
+                <button className="text-wrapper-5" onClick={loginpage}>LOG IN</button>
               </div>
             </div>
             <Group
