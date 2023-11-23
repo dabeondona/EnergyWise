@@ -37,7 +37,7 @@ export default function LoginPage() {
         );
     }
 
-    function B_SignIn() {
+    function BottomSignIn() {
         return (
             <div className="bottom-signin">
                 <div className="regular">Don't have an account?</div>
@@ -50,7 +50,7 @@ export default function LoginPage() {
             <div className="main">
                 <NavigationBar/>
                 <div className="signin">
-                    <img className="logo-energywise" src="logo_energywise.png" />
+                    <img className="logo-energywise" alt="company_logo" src="logo_energywise.png" />
                     <p className="heading">Log in to your account</p>
                     <div className="components">
                         <input type='text' 
@@ -61,7 +61,7 @@ export default function LoginPage() {
                         <input type='password' className="input-field" placeholder="Enter password" value={password}  onChange={(e) => setPassword(e.target.value)} />
                         <button className="button" onClick={handleLogin}>LOGIN</button>
                     </div>
-                    <B_SignIn/>
+                    <BottomSignIn/>
                 </div>
             </div>
     );
