@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useNavigate} from 'react-router-dom';
+import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 import "./LP-Styling.css";
 
@@ -30,9 +30,9 @@ export default function LoginPage() {
     function NavigationBar() {
         return (
             <nav className="navbar">
-                <a className="heading-a">HOME</a>
-                <a className="heading-a">ABOUT US</a>
-                <a className="heading-a">PRICING  </a>
+                <Link to="/" className="heading-a">HOME</Link>
+                <Link to="/aboutus" className="heading-a">ABOUT US</Link>
+                <Link to="/pricing" className="heading-a">PRICING</Link>
             </nav>
         );
     }

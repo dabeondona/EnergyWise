@@ -15,11 +15,22 @@
 
 .heading-a {
     font-family: "Roboto-SemiBold", Helvetica;
+    text-decoration: none;
+    cursor: pointer;
     font-size: 22.5px;  
     font-weight: 600;
     padding: 0 150px;
     color: #04364a;
     letter-spacing: 1px;
+}
+
+.heading-a:visited {
+    color: #04364a;
+    text-decoration: none;
+}
+
+.heading-a:hover, .heading-a:active {
+    text-decoration: none;
 }
 
 .heading {
@@ -138,3 +149,5 @@
     justify-content: center;
     gap: 0px;
 }
+
+
