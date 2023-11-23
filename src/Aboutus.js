@@ -92,7 +92,7 @@ const App = () => {
           </span>
         </p>
         <div className="text-wrapper-12">2023</div>
-        <img className="line-2" alt="Line" src="Felix.png" />
+        <img className="line-2" alt="Line" src="Line-53.png" />
         <img className="ondona" alt="Ondona" src="ondona.png" />
         <img className="ellipse" alt="Ellipse" src="Jane.png" />
         <img className="sepulveda" alt="Sepulveda" src="sepulveda.png" />
@@ -132,7 +132,7 @@ const App = () => {
         <img
           className="initial-logo"
           alt="Initial logo"
-          src="initial-logo 1.png"
+          src="fourwardthinkers.png"
         />
         <img className="mask-group" alt="Mask group" src="Felix.png" />
       </div>
