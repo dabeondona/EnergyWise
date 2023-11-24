@@ -29,9 +29,9 @@ export default function LoginPage() {
 
     function NavigationBar() {
         return (
-            <nav className="navbar">
+            <nav className="navbar-sub">
                 <Link to="/" className="heading-a">HOME</Link>
-                <Link to="/aboutus" className="heading-a">ABOUT US</Link>
+                <Link to="/about-us" className="heading-a">ABOUT US</Link>
                 <Link to="/pricing" className="heading-a">PRICING</Link>
             </nav>
         );
@@ -48,9 +48,13 @@ export default function LoginPage() {
    
     return (
             <div className="main">
+
+            <div className="image-container">
+                <img src="login-3D.png" alt="login-vector-3D" className="login-3D" />
+            </div>
                 <NavigationBar/>
                 <div className="signin">
-                    <img className="logo-energywise" alt="company_logo" src="logo_energywise.png" />
+                    <img className="logo-energywise" alt="company_logo" src="energywise_logo.png" width="250" />
                     <p className="heading">Log in to your account</p>
                     <div className="components">
                         <input type='text' 
@@ -59,7 +63,7 @@ export default function LoginPage() {
                         value={username}  
                         onChange={(e) => setUsername(e.target.value)} />
                         <input type='password' className="input-field" placeholder="Enter password" value={password}  onChange={(e) => setPassword(e.target.value)} />
-                        <button className="button" onClick={handleLogin}>LOGIN</button>
+                        <button className="button" onClick={handleLogin}>LOG IN</button>
                     </div>
                     <BottomSignIn/>
                 </div>
