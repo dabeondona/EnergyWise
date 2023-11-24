@@ -26,6 +26,9 @@ export default function LoginPage() {
                 alert('An error occurred while logging in');
             });
     };
+    const handleRegisterNow = () => {
+        navigate('/registration'); // Navigate to the registration page
+    };
 
     function NavigationBar() {
         return (
@@ -41,7 +44,9 @@ export default function LoginPage() {
         return (
             <div className="bottom-signin">
                 <div className="regular">Don't have an account?</div>
-                <button className="regular-button">Register now</button>
+                <button className="regular-button" onClick={handleRegisterNow}>
+                Register now
+            </button>
             </div>
         );
     }
