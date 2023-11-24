@@ -7,6 +7,8 @@ import LoginPage from './LoginPage';
 import Aboutus from './Aboutus';
 import Testpage from './Testpage';
 import reportWebVitals from './reportWebVitals';
+import RegistrationPage from './RegistrationPage';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +19,7 @@ root.render(
         <Route path="/login" element={<LoginPage />} />
         <Route path="/testpage" element={<Testpage />} />
         <Route path="/about-us" element={<Aboutus />} />
+        <Route path="/registration" element={<RegistrationPage/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
