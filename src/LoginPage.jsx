@@ -27,7 +27,7 @@ export default function LoginPage() {
             });
     };
     const handleRegisterNow = () => {
-        navigate('/registration'); // Navigate to the registration page
+        navigate('/registration'); 
     };
 
     function NavigationBar() {
