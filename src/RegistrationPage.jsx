@@ -14,13 +14,12 @@ export default function RegistrationPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const handleRegistration = () => {
-        axios.post('http://localhost:8080/user/register', {
-            firstName: firstName,
-            lastName: lastName,
+        axios.post('http://localhost:8080/user/insertUser', {
+            firstname: firstName, 
+            lastname: lastName,   
             username: username,
             email: email,
             password: password,
-            confirmPassword: confirmPassword
         })
         .then(response => {
             console.log(response.data);
