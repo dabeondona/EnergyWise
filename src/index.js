@@ -8,11 +8,13 @@ import Aboutus from './Aboutus';
 import Testpage from './Testpage';
 import reportWebVitals from './reportWebVitals';
 import RegistrationPage from './RegistrationPage';
+import { AuthProvider } from './context/AuthProvider';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -22,6 +24,7 @@ root.render(
         <Route path="/registration" element={<RegistrationPage/>} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
 

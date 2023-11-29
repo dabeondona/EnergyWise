@@ -41,9 +41,12 @@ export default function RegistrationPage() {
     const handleRegistration = async (e) => {
         e.preventDefault();
 
-        const verify =  PWD_REGEX.test(password);
-        if(!verify) {
+        const verify = PWD_REGEX.test(password);
+        if (!verify) {
             setErrMsg('Invalid Entry');
+            return;
+        } else if (password !== confirmPassword) {
+            setErrMsg('Passwords do not match');
             return;
         }
 
@@ -55,40 +58,25 @@ export default function RegistrationPage() {
                 email: email,
                 password: password,
             });
-
-            if (response.status === 200) {
+    
+            if (response.status === 201) { 
                 console.log(response.data);
                 alert('Registration successful!');
                 navigate('/login'); 
             } else {
                 throw new Error('Registration failed');
             }
-
+    
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
+                console.error('No response received:', err);
+            } else if (err.response?.status === 409) { 
+                setErrMsg('Username is already taken.');
             } else {
-                alert('Registration failed.');
+                setErrMsg('Registration failed.');
             }
         }
-        
-
-        // axios.post('http://localhost:8080/user/insertUser', {
-        //     firstname: firstName, 
-        //     lastname: lastName,   
-        //     username: username,
-        //     email: email,
-        //     password: password,
-        // })
-        // .then(response => {
-        //     console.log(response.data);
-        //     alert('Registration successful!');
-        //     navigate('/login'); 
-        // })
-        // .catch(error => {
-        //     console.error('Error:', error);
-        //     alert('An error occurred during registration');
-        // });
     };
 
     function NavigationBar() {
