@@ -26,6 +26,7 @@ export default function LoginPage() {
                 alert('An error occurred while logging in');
             });
     };
+    
     const handleRegisterNow = () => {
         navigate('/registration'); 
     };
