@@ -6,6 +6,7 @@ import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
 import Aboutus from './Aboutus';
 import Testpage from './Testpage';
+import PrivateRoute from './PrivateRoute';
 import reportWebVitals from './reportWebVitals';
 import RegistrationPage from './RegistrationPage';
 import { AuthProvider } from './context/AuthProvider';
@@ -19,7 +20,9 @@ root.render(
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/testpage" element={<Testpage />} />
+        <Route path="/testpage" element={<PrivateRoute>
+          <Testpage />
+          </PrivateRoute>} />
         <Route path="/about-us" element={<Aboutus />} />
         <Route path="/registration" element={<RegistrationPage/>} />
       </Routes>
