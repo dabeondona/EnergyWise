@@ -1,30 +1,48 @@
-import React, {useState} from "react";
+import React, {useState, useRef, useContext} from "react";
+import AuthContext from "./context/AuthProvider";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 import "./LP-Styling.css";
 
 export default function LoginPage() {
+    const { setAuth } = useContext(AuthContext);
     let navigate = useNavigate();
+
+    const userRef = useRef();
+    const errRef = useRef();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errMsg, setErrMsg] = useState('');
 
-    const handleLogin = () => {
-        axios.get('http://localhost:8080/user/getAllUsers')
-            .then(response => {
-                const users = response.data;
-                const user = users.find(user => user.username === username && user.password === password);
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setErrMsg('');
 
-                if (user) {
-                    navigate('/testpage');
-                } else {
-                    alert('Incorrect username or password');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while logging in');
+        try {
+            const response = await axios.post('http://localhost:8080/user/login', {
+                username,
+                password
             });
+    
+            localStorage.setItem('token', response.data.jwtToken); 
+            setAuth({ username, ...response.data.userData });
+    
+            navigate('/testpage'); 
+        } catch (err) {
+            if (!err.response) {
+                setErrMsg('No server response.');
+            } else if (err.response.status === 401) {
+                setErrMsg('Unauthorized. Please check your username and password.');
+            } else {
+                setErrMsg('Login failed. Please try again later.');
+            }
+            errRef.current.focus(); 
+        }
+    };
+    
+    const handleRegisterNow = () => {
+        navigate('/registration'); 
     };
 
     function NavigationBar() {
@@ -41,7 +59,9 @@ export default function LoginPage() {
         return (
             <div className="bottom-signin">
                 <div className="regular">Don't have an account?</div>
-                <button className="regular-button">Register now</button>
+                <button className="regular-button" onClick={handleRegisterNow}>
+                Register now
+            </button>
             </div>
         );
     }
@@ -58,11 +78,20 @@ export default function LoginPage() {
                     <p className="heading">Log in to your account</p>
                     <div className="components">
                         <input type='text' 
+                        ref={userRef}
+                        id='username'
+                        autoComplete="off"
+                        required
                         className="input-field" 
                         placeholder="Enter username" 
                         value={username}  
                         onChange={(e) => setUsername(e.target.value)} />
-                        <input type='password' className="input-field" placeholder="Enter password" value={password}  onChange={(e) => setPassword(e.target.value)} />
+                        <input type='password' 
+                        id='password' 
+                        className="input-field" 
+                        placeholder="Enter password" 
+                        value={password}  
+                        onChange={(e) => setPassword(e.target.value)} />
                         <button className="button" onClick={handleLogin}>LOG IN</button>
                     </div>
                     <BottomSignIn/>
