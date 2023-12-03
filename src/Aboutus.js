@@ -204,6 +204,7 @@ const AboutUs = () => {
                   </div>
                 
                 </div>
+                <p className="motto">When in Doubt, use ChatGPT</p>
             </div>    
 
         <div className="container-7">
