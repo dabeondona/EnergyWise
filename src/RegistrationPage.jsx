@@ -84,7 +84,7 @@ export default function RegistrationPage() {
             <nav className="navbar-sub">
                 <Link to="/" className="heading-a">HOME</Link>
                 <Link to="/about-us" className="heading-a">ABOUT US</Link>
-                <Link to="/pricing" className="heading-a">PRICING</Link>
+                <Link to="/contact-us" className="heading-a">CONTACT</Link>
             </nav>
         );
     }

@@ -10,6 +10,7 @@ import PrivateRoute from './PrivateRoute';
 import reportWebVitals from './reportWebVitals';
 import RegistrationPage from './RegistrationPage';
 import { AuthProvider } from './context/AuthProvider';
+import ContactPage from './ContactPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -20,6 +21,7 @@ root.render(
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/testpage" element={<PrivateRoute>
           <Testpage />
           </PrivateRoute>} />

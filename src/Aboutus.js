@@ -31,7 +31,7 @@ const AboutUs = () => {
                       <Nav className="nav-links mr-auto">
                         <Link to="/" className="nav-links">HOME</Link>
                         <Link to="/about-us" className="nav-links">ABOUT US</Link>
-                        <Link href="/pricing" className="nav-links">PRICING</Link>
+                        <Link to="/contact-us" className="nav-links">CONTACT</Link>
                       </Nav>
                       <div className="button-main">
                         <button onClick={handleLoginClick}>LOG IN</button>
