@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel, Navbar, Nav } from "react-bootstrap";
 import {useNavigate ,Link } from "react-router-dom";
-import "./LandingPage.css"; // Import your CSS file
+import "./css/LandingPage.css"; // Import your CSS file
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 
 const LandingPage = () => {

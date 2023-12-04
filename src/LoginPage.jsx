@@ -1,8 +1,8 @@
 import React, {useState, useRef, useContext} from "react";
-import AuthContext from "./context/AuthProvider";
+import { AuthContext } from "./context/AuthProvider";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
-import "./LP-Styling.css";
+import "./css/LP-Styling.css";
 
 export default function LoginPage() {
     const { setAuth } = useContext(AuthContext);
@@ -26,8 +26,8 @@ export default function LoginPage() {
             });
     
             localStorage.setItem('token', response.data.jwtToken); 
-            setAuth({ username, ...response.data.userData });
-    
+            setAuth(true);
+            
             navigate('/testpage'); 
         } catch (err) {
             if (!err.response) {

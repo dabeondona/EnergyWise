@@ -4,8 +4,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 import {Navbar, Nav } from "react-bootstrap";
 import {useNavigate ,Link } from "react-router-dom";
-import "./LandingPage.css"; 
-import "./C-Styling.css";
+import "./css/LandingPage.css"; 
+import "./css/C-Styling.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 

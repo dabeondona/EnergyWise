@@ -1,11 +1,11 @@
 import React from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
-import "./App.css";
+import "./css/App.css";
 import { Navbar, Nav } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import "./LandingPage.css";
-import "./Aboutus.css";
+import "./css/LandingPage.css";
+import "./css/Aboutus.css";
 
 const AboutUs = () => {
   

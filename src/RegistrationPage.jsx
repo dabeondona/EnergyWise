@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
-import "./RP-Styling.css";
+import "./css/RP-Styling.css";
 
 export default function RegistrationPage() {
     let navigate = useNavigate();
