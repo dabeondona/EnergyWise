@@ -56,4 +56,30 @@
       0px 87px 80px rgba(0, 0, 0, 0.02)
     ;
   }
+
+  .contact-container {
+    max-width: 600px; 
+    margin: auto;
+    padding: 40px;
+    background-color: #F5FCFF;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+  }
+
+  .contact-form-container {
+    /* Adjust the width as necessary */
+    max-width: 500px; /* or 50% if you prefer percentage widths */
+    padding: 20px;
+    /* Add additional styles for the form container here */
+  }
+  
+  .address-support-container {
+    /* Adjust the width as necessary */
+    max-width: 500px; /* or 50% if you prefer percentage widths */
+    padding: 20px;
+    /* Add additional styles for the address/support container here */
+  }
+  
+
   

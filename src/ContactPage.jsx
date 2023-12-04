@@ -87,16 +87,16 @@ export default function ContactPage() {
           
               <div data-aos="fade-up" className="container-1" style={{backgroundColor:"#ffffff"}}>Contact Us
               </div>
-              <div data-aos="fade-right" style={{display:"flex", flex:"3", paddingRight:"50px"}}>
-                <div style={{padding:"25px", backgroundColor:"#F5FCFF", display:"block"}}>
-                  <h5 className="heading" style={{marginRight:"120px"}}>Send us a Message!</h5>
+              <div data-aos="fade-in" style={{ display: 'flex', justifyContent: 'center', alignItems: 'start', flexWrap: 'wrap' }}>
+                <div className="contact-form-container" style={{flex: '1', margin: '10px', padding:"25px", backgroundColor:"#F5FCFF", display:"block"}}>
+                  <h5 className="heading">Send us a Message!</h5>
                   <input type="text" className="input-field" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)}></input>
                   <input type="text" className="input-field" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
                   <textarea type="text" className="input-field" style={{paddingTop:"10px", paddingBottom:"50px"}} placeholder="Message" value={msg} onChange={(e) => setMsg(e.target.value)}></textarea>
                   <button className="button" onClick={sendMsg}>SEND</button>
                 </div>
                 <div><hr></hr></div>
-                <div style={{marginRight:"50px", padding:"25px", backgroundColor:"#F5FCFF"}}>
+                <div className="address-support-container" style={{flex: '1', margin: '10px', padding:"25px", backgroundColor:"#F5FCFF"}}>
                   <h5 className="heading">Address</h5>
                   <ul>
                   <li style={{color:"#04364a", fontWeight:"0", fontFamily:"Robot-Regular, Helvetica"}}>N. Bacalso Avenue, Cebu City, Philippines</li>
