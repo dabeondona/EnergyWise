@@ -37,7 +37,6 @@ export default function LoginPage() {
             } else {
                 setErrMsg('Login failed. Please try again later.');
             }
-            errRef.current.focus(); 
         }
     };
     
