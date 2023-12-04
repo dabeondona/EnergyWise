@@ -6,6 +6,7 @@ import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
 import Aboutus from './Aboutus';
 import Testpage from './Testpage';
+import PricingPage from './PricingPage';
 import PrivateRoute from './PrivateRoute';
 import reportWebVitals from './reportWebVitals';
 import RegistrationPage from './RegistrationPage';
@@ -22,6 +23,7 @@ root.render(
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/contact-us" element={<ContactPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
         <Route path="/testpage" element={<PrivateRoute>
           <Testpage />
           </PrivateRoute>} />

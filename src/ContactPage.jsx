@@ -77,6 +77,7 @@ export default function ContactPage() {
                         <Link to="/" className="nav-links">HOME</Link>
                         <Link to="/about-us" className="nav-links">ABOUT US</Link>
                         <Link to="/contact-us" className="nav-links">CONTACT</Link>
+                        <Link to="/pricing" className="nav-links">PRICING</Link>
                       </Nav>
                       <div className="button-main">
                         <button onClick={handleLoginClick}>LOG IN</button>

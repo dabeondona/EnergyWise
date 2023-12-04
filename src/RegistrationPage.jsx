@@ -85,6 +85,7 @@ export default function RegistrationPage() {
                 <Link to="/" className="heading-a">HOME</Link>
                 <Link to="/about-us" className="heading-a">ABOUT US</Link>
                 <Link to="/contact-us" className="heading-a">CONTACT</Link>
+                <Link to="/pricing" className="heading-a">PRICING</Link>
             </nav>
         );
     }
