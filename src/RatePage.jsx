@@ -1,7 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { AuthContext } from "./context/AuthProvider";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
+import "./css/LP-Styling.css"
+import "./css/R-Styling.css"
 
 export default function RatePage() {
     const [rates, setRates] = useState({
@@ -10,6 +12,17 @@ export default function RatePage() {
         price_luzon: null,
         price_mindanao: null,
     });
+
+    // PLACEHOLDER -------------------------------------------------------------------------------------------------
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth(); 
+    const lastMonth = new Date(currentDate.setMonth(currentMonth - 1));
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+    const lastMonthName = monthNames[lastMonth.getMonth()];
+    // ENDS HERE -------------------------------------------------------------------------------------------------
 
     const [inputtedValue, setInputtedValue] = useState('');
     const [currentRate, setCurrentRate] = useState(null);
@@ -59,28 +72,69 @@ export default function RatePage() {
 
     return (
         <div>
-            <h3>Energy Rate</h3>
-            <h5>Hi, Welcome {userDetails.username}</h5>
-            <div>
-                <h2>Energy Calculator</h2>
-                <input type='text'
-                    id='energyUsage'
-                    autoComplete="off"
-                    required
-                    className="input-field"
-                    placeholder="Enter energy usage"
-                    value={inputtedValue}
-                    onChange={(e) => setInputtedValue(e.target.value)} />
-                <button className="button" onClick={handleCalculation}>Calculate</button>
-                <p>Output here: {output} php</p>
-            </div>
 
-            <div>
-                <h3>Energy Rate for {rates.month}</h3>
-                <p>Current Price: {rates.price}</p>
-                <p>Price Luzon: {rates.price_luzon}</p>
-                <p>Price Mindanao: {rates.price_mindanao}</p>
+            <div className="navigation">
+                <img src="energywise_logo.png" alt="Logo" width="170px" style={{marginLeft:"25px", marginBottom:"50px"}}/>
+                <ul className="nav-list">
+                    <li><NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink></li>
+                    <li><NavLink to="/rate" activeClassName="active">Rate</NavLink></li>
+                    <li><NavLink to="/calendar" activeClassName="active">Calendar</NavLink></li>
+                    <li><NavLink to="/tips" activeClassName="active">Tips</NavLink></li>
+                    <li><NavLink to="/goals" activeClassName="active">Goals</NavLink></li>
+                    <hr style={{marginTop:"400px"}}></hr>
+                    <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
+                </ul>
             </div>
+                <div className="rate-page-container">
+                        <div className="rate-info-container">
+                                <div className="rate-info-card">
+                                    <h3 className="heading" style={{textAlign:"left"}}>Energy Rate</h3>
+                                        <div className="region-rates">
+                                            <div className="rate-region luzon">
+                                                <h3 className="heading">{lastMonthName}</h3> {/* to be changed */}
+                                                <p className="price">{rates.price - 2}</p> {/* to be changed */}
+                                                <p className="unit">1 kWh</p>
+                                            </div>
+                                            <div className="rate-region mindanao">
+                                                <h3 className="heading" style={{color:"#F3DC8B"}}>{rates.month}</h3>
+                                                <p className="price">{rates.price}</p>
+                                                <p className="unit">1 kWh</p>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div className="rate-info-card">
+                                    <div className="region-rates">
+                                        <div className="rate-region luzon">
+                                        <h3 className="heading">Luzon</h3>
+                                        <p className="price">{rates.price_luzon}</p>
+                                        <p className="unit">1 kWh</p>
+                                        </div>
+                                        <div className="rate-region mindanao">
+                                        <h3 className="heading">Mindanao</h3>
+                                        <p className="price">{rates.price_mindanao}</p>
+                                        <p className="unit">1 kWh</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="rate-info-card">
+                                    <h3 className="heading" style={{textAlign:"left"}}>Energy Calculator</h3>
+                                    <input type='text'
+                                        id='energyUsage'
+                                        autoComplete="off"
+                                        required
+                                        className="input-field"
+                                        placeholder="Enter energy usage"
+                                        value={inputtedValue}
+                                        onChange={(e) => setInputtedValue(e.target.value)}
+                                        style={{backgroundColor:"#F6F6F6", color:"#A6A6A6"}} />
+                                    <button className="button" onClick={handleCalculation}>Calculate</button>
+                                    <p style={{marginTop:"40px", fontFamily:"Roboto-SemiBold, Helvetica", fontWeight:"600", color:"#04364A"}}>&gt; {output} {!output ? <></>:<>php</>}</p>
+                                </div>
+                        </div>
+                </div>
         </div>
+    
     );
 };

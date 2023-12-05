@@ -1,0 +1,88 @@
+.navigation {
+    width: 250px; 
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #F5FCFF;
+    padding-top: 20px; 
+}
+  
+.nav-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.nav-list li a {
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-weight: 700;
+    padding: 15px 15px;
+    text-decoration: none;
+    display: block;
+    color: #04364A; 
+}
+
+.nav-list li a.active,
+.nav-list li a:hover {
+    color: #fff; 
+    background-color: #73D2F8; 
+}
+
+.rate-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    height: 100%;
+  }
+  
+.rate-info-container {
+    width: 100%;
+    max-width: 600px; 
+}
+
+.rate-info-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.region-rates {
+    display: flex;
+    justify-content: center;
+    gap: 20px; 
+}
+
+.rate-region {
+    background-color: #F5FCFF; 
+    padding: 10px;
+    width: 120px;
+    text-align: center;
+}
+
+.rate-region h3 {
+    color: #04364A;
+    margin-bottom: 5px;
+}
+
+.price {
+    font-size: 1.5em; 
+    font-family: "Roboto-Medium", Helvetica;
+    font-weight: 700;
+    color: #04364A;
+    margin-bottom: 5px;
+}
+
+.unit {
+    font-size: 0.9em;
+    font-family: "Roboto-Medium", Helvetica;
+    font-weight: 700;
+    color: #FFBD59;
+}
+
+.output {
+    margin-top: 8px;
+}
+
