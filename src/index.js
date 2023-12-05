@@ -5,7 +5,7 @@ import './css/index.css';
 import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
 import Aboutus from './Aboutus';
-import Testpage from './Testpage';
+import RatePage from './RatePage';
 import PricingPage from './PricingPage';
 import PrivateRoute from './PrivateRoute';
 import reportWebVitals from './reportWebVitals';
@@ -24,8 +24,8 @@ root.render(
         <Route path="/login" element={<LoginPage />} />
         <Route path="/contact-us" element={<ContactPage />} />
         <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/testpage" element={<PrivateRoute>
-          <Testpage />
+        <Route path="/rate" element={<PrivateRoute>
+          <RatePage />
           </PrivateRoute>} />
         <Route path="/about-us" element={<Aboutus />} />
         <Route path="/registration" element={<RegistrationPage/>} />

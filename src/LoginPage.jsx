@@ -35,7 +35,7 @@ export default function LoginPage() {
             localStorage.setItem('userDetails', JSON.stringify(userDetails));
             
             setAuth(true);
-            navigate('/testpage');
+            navigate('/rate');
 
         } catch (err) {
             if (!err.response) {
