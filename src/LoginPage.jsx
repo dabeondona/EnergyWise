@@ -20,22 +20,32 @@ export default function LoginPage() {
         setErrMsg('');
 
         try {
-            const response = await axios.post('http://localhost:8080/user/login', {
+            const loginResponse = await axios.post('http://localhost:8080/user/login', {
                 username,
                 password
             });
+            localStorage.setItem('token', loginResponse.data.jwtToken);
     
-            localStorage.setItem('token', response.data.jwtToken); 
-            setAuth(true);
+            const userDetailsResponse = await axios.get('http://localhost:8080/user/getUserDetails', { 
+                params: { username: username }, 
+                headers: { Authorization: `Bearer ${loginResponse.data.jwtToken}` }
+            });
+            const userDetails = userDetailsResponse.data;
+            console.log('User Details:', userDetails);
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
             
-            navigate('/testpage'); 
+            setAuth(true);
+            navigate('/testpage');
+
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response.');
             } else if (err.response.status === 401) {
                 setErrMsg('Unauthorized. Please check your username and password.');
+                alert('Incorrect username or password.');
             } else {
                 setErrMsg('Login failed. Please try again later.');
+                alert('Login failed. Please try again later.');
             }
         }
     };
