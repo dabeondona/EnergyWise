@@ -1,7 +1,7 @@
-import React, {useState, useRef, useContext} from "react";
-import AuthContext from "./context/AuthProvider";
-import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
+import React, { useContext, useRef, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from "./context/AuthProvider";
 import "./css/LP-Styling.css";
 
 export default function LoginPage() {
@@ -20,52 +20,35 @@ export default function LoginPage() {
         setErrMsg('');
 
         try {
-            // Attempt admin login
-            const adminLoginResponse = await axios.post('http://localhost:8080/admin/login', {
+            const loginResponse = await axios.post('http://localhost:8080/user/login', {
                 username,
                 password
             });
-
-            localStorage.setItem('token', adminLoginResponse.data.jwtToken);
+            localStorage.setItem('token', loginResponse.data.jwtToken);
+    
+            const userDetailsResponse = await axios.get('http://localhost:8080/user/getUserDetails', { 
+                params: { username: username }, 
+                headers: { Authorization: `Bearer ${loginResponse.data.jwtToken}` }
+            });
+            const userDetails = userDetailsResponse.data;
+            console.log('User Details:', userDetails);
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+            
             setAuth(true);
-            navigate('/admin-dashboard'); // Redirect to admin dashboard
+            navigate('/rate');
 
-        } catch (adminError) {
-            if (adminError.response && adminError.response.status === 401) {
-                try {
-                    // If admin login fails, try user login
-                    const userLoginResponse = await axios.post('http://localhost:8080/user/login', {
-                        username,
-                        password
-                    });
-                    localStorage.setItem('token', userLoginResponse.data.jwtToken);
-                    setAuth(true);
-                    navigate('/rate'); // Redirect to user dashboard
-
-                } catch (userError) {
-                    // Handle user login failure
-                    handleLoginError(userError);
-                }
+        } catch (err) {
+            if (!err.response) {
+                setErrMsg('No server response.');
+            } else if (err.response.status === 401) {
+                setErrMsg('Unauthorized. Please check your username and password.');
+                alert('Incorrect username or password.');
             } else {
-                // Handle other errors for admin login
-                handleLoginError(adminError);
+                setErrMsg('Login failed. Please try again later.');
+                alert('Login failed. Please try again later.');
             }
         }
     };
-
-    const handleLoginError = (error) => {
-        if (!error.response) {
-            setErrMsg('No server response.');
-        } else if (error.response.status === 401) {
-            setErrMsg('Unauthorized. Please check your username and password.');
-            console.log(error)
-            alert('Incorrect username or password.');
-        } else {
-            setErrMsg('Login failed. Please try again later.');
-            alert('Login failed. Please try again later.');
-        }
-    };
-    
     
     const handleRegisterNow = () => {
         navigate('/registration'); 
