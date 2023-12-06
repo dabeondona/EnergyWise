@@ -1,9 +1,11 @@
 import React from "react";
-import "./App.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+import "./css/App.css";
 import { Navbar, Nav } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import "./LandingPage.css";
-import "./Aboutus.css";
+import "./css/LandingPage.css";
+import "./css/Aboutus.css";
 
 const AboutUs = () => {
   
@@ -12,11 +14,12 @@ const AboutUs = () => {
   const handleLoginClick = () => {
     navigate('/login'); 
   };
-  
+
+  AOS.init();  
   return (
     <div className="about-us">
       <div className="div">
-        
+              
         {/* NavigationBar */}
         <Navbar sticky="top" className="navbar-main">
                 {/* Navbar content */}
@@ -28,7 +31,8 @@ const AboutUs = () => {
                       <Nav className="nav-links mr-auto">
                         <Link to="/" className="nav-links">HOME</Link>
                         <Link to="/about-us" className="nav-links">ABOUT US</Link>
-                        <Link href="/pricing" className="nav-links">PRICING</Link>
+                        <Link to="/contact-us" className="nav-links">CONTACT</Link>
+                        <Link to="/pricing" className="nav-links">PRICING</Link>
                       </Nav>
                       <div className="button-main">
                         <button onClick={handleLoginClick}>LOG IN</button>
@@ -36,11 +40,11 @@ const AboutUs = () => {
                     </Navbar.Collapse>
                         </Navbar>
           
-              <div className="container-1">About Us
+              <div data-aos="fade-up" className="container-1">About Us
                     <p className="p">Every journey comes with a story.</p>
               </div>
           
-               <div className="container-2">
+               <div data-aos="fade-in" className="container-2">
                 <div>
                 <img
                     className="image-container-1"
@@ -64,7 +68,7 @@ const AboutUs = () => {
                  
                </div>
 
-               <div className="container-3">
+               <div data-aos="fade-in" className="container-3">
                <p className="paragraph">
                   As Streisand celebrated its decade of success, Dave Ondona realized
                   that while they had been instrumental in transforming large-scale
@@ -75,7 +79,14 @@ const AboutUs = () => {
                 </p>
                </div>
 
-
+              <div data-aos="fade-up"
+                  data-aos-offset="200"
+                  data-aos-delay="50"
+                  data-aos-duration="500"
+                  data-aos-easing="ease-in-out"
+                  data-aos-mirror="true"
+                  data-aos-once="false"
+                  data-aos-anchor-placement="top-center" >
                <div className="container-4">
                 <div>
                 <img
@@ -117,8 +128,17 @@ const AboutUs = () => {
                 <div>
                 <p className="motto">“Progressive Thinking towards Energy Efficiency”</p>
                 </div>
+              </div>
 
-                <div>
+              <div data-aos="fade-up"
+                  data-aos-offset="100"
+                  data-aos-delay="50"
+                  data-aos-duration="500"
+                  data-aos-easing="ease-in-out"
+                  data-aos-mirror="true"
+                  data-aos-once="false"
+                  data-aos-anchor-placement="top-center">
+                <div style={{marginTop:"150px"}}>
                 <p className="sub-text">Our Team</p>
                 </div>
 
@@ -185,7 +205,8 @@ const AboutUs = () => {
                   </div>
                 
                 </div>
-                
+                <p className="motto">When in Doubt, use ChatGPT</p>
+            </div>    
 
         <div className="container-7">
           <p className="copyright">

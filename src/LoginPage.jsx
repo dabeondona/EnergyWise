@@ -1,33 +1,57 @@
-import React, {useState} from "react";
+import React, {useState, useRef, useContext} from "react";
+import { AuthContext } from "./context/AuthProvider";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
-import "./LP-Styling.css";
+import "./css/LP-Styling.css";
 
 export default function LoginPage() {
+    const { setAuth } = useContext(AuthContext);
     let navigate = useNavigate();
+
+    const userRef = useRef();
+    const errRef = useRef();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errMsg, setErrMsg] = useState('');
 
-    const handleLogin = () => {
-        axios.get('http://localhost:8080/user/getAllUsers')
-            .then(response => {
-                const users = response.data;
-                const user = users.find(user => user.username === username && user.password === password);
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        setErrMsg('');
 
-                if (user) {
-                    navigate('/testpage');
-                } else {
-                    alert('Incorrect username or password');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred while logging in');
+        try {
+            const loginResponse = await axios.post('http://localhost:8080/user/login', {
+                username,
+                password
             });
+            localStorage.setItem('token', loginResponse.data.jwtToken);
+    
+            const userDetailsResponse = await axios.get('http://localhost:8080/user/getUserDetails', { 
+                params: { username: username}, 
+                headers: { Authorization: `Bearer ${loginResponse.data.jwtToken}` }
+            });
+            const userDetails = userDetailsResponse.data;
+            console.log('User Details:', userDetails);
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+            
+            setAuth(true);
+            navigate('/rate');
+
+        } catch (err) {
+            if (!err.response) {
+                setErrMsg('No server response.');
+            } else if (err.response.status === 401) {
+                setErrMsg('Unauthorized. Please check your username and password.');
+                alert('Incorrect username or password.');
+            } else {
+                setErrMsg('Login failed. Please try again later.');
+                alert('Login failed. Please try again later.');
+            }
+        }
     };
+    
     const handleRegisterNow = () => {
-        navigate('/registration'); // Navigate to the registration page
+        navigate('/registration'); 
     };
 
     function NavigationBar() {
@@ -35,6 +59,7 @@ export default function LoginPage() {
             <nav className="navbar-sub">
                 <Link to="/" className="heading-a">HOME</Link>
                 <Link to="/about-us" className="heading-a">ABOUT US</Link>
+                <Link to="/contact-us" className="heading-a">CONTACT</Link>
                 <Link to="/pricing" className="heading-a">PRICING</Link>
             </nav>
         );
@@ -63,11 +88,20 @@ export default function LoginPage() {
                     <p className="heading">Log in to your account</p>
                     <div className="components">
                         <input type='text' 
+                        ref={userRef}
+                        id='username'
+                        autoComplete="off"
+                        required
                         className="input-field" 
                         placeholder="Enter username" 
                         value={username}  
                         onChange={(e) => setUsername(e.target.value)} />
-                        <input type='password' className="input-field" placeholder="Enter password" value={password}  onChange={(e) => setPassword(e.target.value)} />
+                        <input type='password' 
+                        id='password' 
+                        className="input-field" 
+                        placeholder="Enter password" 
+                        value={password}  
+                        onChange={(e) => setPassword(e.target.value)} />
                         <button className="button" onClick={handleLogin}>LOG IN</button>
                     </div>
                     <BottomSignIn/>

@@ -1,27 +1,37 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './css/index.css';
 import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
 import Aboutus from './Aboutus';
-import Testpage from './Testpage';
+import RatePage from './RatePage';
+import PricingPage from './PricingPage';
+import PrivateRoute from './PrivateRoute';
 import reportWebVitals from './reportWebVitals';
 import RegistrationPage from './RegistrationPage';
+import { AuthProvider } from './context/AuthProvider';
+import ContactPage from './ContactPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/testpage" element={<Testpage />} />
+        <Route path="/contact-us" element={<ContactPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/rate" element={<PrivateRoute>
+          <RatePage />
+          </PrivateRoute>} />
         <Route path="/about-us" element={<Aboutus />} />
         <Route path="/registration" element={<RegistrationPage/>} />
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
 
