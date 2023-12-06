@@ -13,8 +13,13 @@ export default function RegistrationPage() {
     const [lastName, setLastName] = useState('');
     const [username, setUsername] = useState('');
 
+    const togglePasswordVisibility = () => {
+        setPasswordShown(passwordShown => !passwordShown);
+    };
+
     const [email, setEmail] = useState('');
 
+    const [passwordShown, setPasswordShown] = useState(false);
     const [password, setPassword] = useState('');
     const [validpassword, setValidPassword] = useState(false);
     const [passwordFocus, setPasswordFocus] = useState(false);
@@ -108,8 +113,11 @@ export default function RegistrationPage() {
                     <input type='text' id='usrn' autoComplete='off' required className="input-field" placeholder="Enter Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                     <input type='text' id='ueml' autoComplete='off' required className="input-field" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                     
-                    <input type='password' required onFocus={() => setPasswordFocus(true)} onBlur={() => setPasswordFocus(false)} className="input-field" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type={passwordShown ? "text" : "password"} required onFocus={() => setPasswordFocus(true)} onBlur={() => setPasswordFocus(false)} className="input-field" placeholder="Enter Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                     {passwordFocus && !validpassword ? <><p id='pwdnote' style={{letterSpacing:'1px', fontFamily:'"Roboto-SemiBold", Helvetica',textAlign:'center',color:'#ff2400', fontWeight:'400', marginBottom:'10px', fontSize:"15px"}}>8 to 24 characters.<br></br>Must include a combination of uppercase and <br></br>lowercase letters, as well as special characters.<br/><br/>Allowed special characters: ! @ # $ %</p></>:<></>}
+                    <button className="button" onClick={togglePasswordVisibility}>
+                        {passwordShown ? "Hide" : "Show"}
+                    </button>
                     <input type='password' required onFocus={() => setMatchFocus(true)} onBlur={() => setMatchFocus(false)} className="input-field" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                     {matchFocus && !validconfirmpassword ? <><p id='pwdnote' style={{letterSpacing:'1px', fontFamily:'"Roboto-SemiBold", Helvetica',textAlign:'center',color:'#ff2400', fontWeight:'400', marginBottom:'10px', fontSize:"15px"}}>Must match the primary password field.</p></>:<></>}
 
