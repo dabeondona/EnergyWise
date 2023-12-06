@@ -27,7 +27,7 @@ export default function LoginPage() {
             localStorage.setItem('token', loginResponse.data.jwtToken);
     
             const userDetailsResponse = await axios.get('http://localhost:8080/user/getUserDetails', { 
-                params: { username: username }, 
+                params: { username: username}, 
                 headers: { Authorization: `Bearer ${loginResponse.data.jwtToken}` }
             });
             const userDetails = userDetailsResponse.data;

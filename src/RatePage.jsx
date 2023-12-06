@@ -85,6 +85,11 @@ export default function RatePage() {
                     <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
                 </ul>
             </div>
+            <div style={{marginLeft:"300px", marginTop:"25px"}}>
+                <h3 className="">EnergyRate</h3>
+                <p>Hi, Welcome {userDetails.username}!</p>t
+                <hr></hr>
+            </div>
                 <div className="rate-page-container">
                         <div className="rate-info-container">
                                 <div className="rate-info-card">
@@ -135,7 +140,7 @@ export default function RatePage() {
                                     </div>
                                 </div>
 
-                                <div className="rate-info-card">
+                                <div className="rate-info-card" style={{paddingBottom:"30px"}}>
                                     <h3 className="heading" style={{textAlign:"left"}}>Energy Calculator</h3>
                                     <input type='text'
                                         id='energyUsage'
@@ -145,13 +150,13 @@ export default function RatePage() {
                                         placeholder="Enter energy usage"
                                         value={inputtedValue}
                                         onChange={(e) => setInputtedValue(e.target.value)}
-                                        style={{backgroundColor:"#F6F6F6", color:"#A6A6A6"}} />
+                                        style={{backgroundColor:"#F6F6F6", color:"#A6A6A6", marginLeft:"50px"}} />
                                     <input type='text'
                                         disabled="true"
                                         className="input-field"
                                         placeholder={output ? `${output} php` : ""}
-                                        style={{backgroundColor:"#D9D9D9", color:"#ffffff"}} />
-                                    <button className="button" onClick={handleCalculation}>Calculate</button>
+                                        style={{backgroundColor:"#D9D9D9", color:"#ffffff", marginLeft:"50px"}} />
+                                    <button className="button" style={{marginLeft:"50px"}}onClick={handleCalculation}>Calculate</button>
                                 </div>
                         </div>
                 </div>
