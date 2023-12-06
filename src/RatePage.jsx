@@ -69,7 +69,7 @@ export default function RatePage() {
             setOutput(calculatedOutput.toFixed(2)); 
         }
     };
-
+    // ???
     return (
         <div>
 
