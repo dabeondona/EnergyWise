@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext} from "react";
-import AuthContext from "./context/AuthProvider";
+import {AuthContext} from "./context/AuthProvider";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 import "./css/LP-Styling.css";
@@ -25,7 +25,6 @@ export default function LoginPage() {
                 username,
                 password
             });
-
             localStorage.setItem('token', adminLoginResponse.data.jwtToken);
             setAuth(true);
             navigate('/admin-dashboard'); // Redirect to admin dashboard
@@ -38,6 +37,7 @@ export default function LoginPage() {
                         username,
                         password
                     });
+                    console.log(userLoginResponse.data.jwtToken)
                     localStorage.setItem('token', userLoginResponse.data.jwtToken);
                     setAuth(true);
                     navigate('/rate'); // Redirect to user dashboard

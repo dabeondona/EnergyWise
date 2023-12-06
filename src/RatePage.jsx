@@ -1,11 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
-import AuthContext from "./context/AuthProvider";
+import {AuthContext} from "./context/AuthProvider";
 import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import "./css/LP-Styling.css"
 import "./css/R-Styling.css"
 
 export default function RatePage() {
+    const [vnotif, setVNotif] = useState(false);
+    const [vprof, setVProf] = useState(false);
     const [rates, setRates] = useState({
         month: '',
         price: null,
@@ -38,6 +40,14 @@ export default function RatePage() {
             fetchCurrentMonthRate();
         }
     }, [auth, navigate]);
+
+    function handleNotifVisibility() {
+        if(!vnotif) {
+            setVNotif(true);
+        } else {
+            setVNotif(false);
+        }
+    }
 
     const fetchCurrentMonthRate = async () => {
         try {
@@ -85,10 +95,22 @@ export default function RatePage() {
                     <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
                 </ul>
             </div>
-            <div style={{marginLeft:"300px", marginTop:"25px"}}>
-                <h3 className="">EnergyRate</h3>
-                <p>Hi, Welcome {userDetails.username}!</p>
-                <hr></hr>
+            <div style={{marginLeft:"300px"}}>
+                <div style={{display:"flex", flex:"1"}}>
+                    <div>
+                        <h3 className="heading" style={{textAlign:"left", marginBottom:"10px", marginTop:"40px", marginLeft:"25px"}}>Energy Rate</h3>
+                        <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
+                    </div>
+                    <div style={{marginLeft:"30px",  marginTop:"45px", position:"relative", left:"70%"}}>
+                        <button onClick={handleNotifVisibility}>Notifications</button>
+                        <button>Profile</button>
+                        {vnotif ? <div style={{position: "fixed", top:"90px", backgroundColor:"#808080", paddingTop:"50px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"50px", left:"1500px", borderRadius:"20px"}}>
+                            <h1 className="heading" style={{color:"#ffffff", marginBottom:"0px"}}>Notifications</h1>
+                            <div style={{backgroundColor:"#73D2F8", margin:"50px"}}>test</div>
+                        </div>:<></>}
+                    </div>
+                </div>
+                <hr style={{width:"96%"}}></hr>
             </div>
                 <div className="rate-page-container">
                         <div className="rate-info-container">
