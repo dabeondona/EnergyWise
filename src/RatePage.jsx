@@ -69,7 +69,7 @@ export default function RatePage() {
             setOutput(calculatedOutput.toFixed(2)); 
         }
     };
-
+    // ???
     return (
         <div>
 
@@ -85,6 +85,11 @@ export default function RatePage() {
                     <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
                 </ul>
             </div>
+            <div style={{marginLeft:"300px", marginTop:"25px"}}>
+                <h3 className="">EnergyRate</h3>
+                <p>Hi, Welcome {userDetails.username}!</p>
+                <hr></hr>
+            </div>
                 <div className="rate-page-container">
                         <div className="rate-info-container">
                                 <div className="rate-info-card">
@@ -92,12 +97,23 @@ export default function RatePage() {
                                         <div className="region-rates">
                                             <div className="rate-region luzon">
                                                 <h3 className="heading">{lastMonthName}</h3> {/* to be changed */}
-                                                <p className="price">{rates.price - 2}</p> {/* to be changed */}
+                                                <div style={{display:"flex", alignItems:"baseline", }}>
+                                                    <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>P</p>
+                                                    <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price - 2}</p>
+                                                </div>{/* to be changed */}
                                                 <p className="unit">1 kWh</p>
                                             </div>
                                             <div className="rate-region mindanao">
                                                 <h3 className="heading" style={{color:"#F3DC8B"}}>{rates.month}</h3>
-                                                <p className="price">{rates.price}</p>
+                                                <div style={{display:"flex", alignItems:"baseline", }}>
+                                                    <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>P</p>
+                                                    <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price}</p>
+                                                </div>
+                                                <p className="unit">1 kWh</p>
+                                            </div>
+                                            <div className="rate-region mindanao">
+                                                <h3 className="heading">Expected Change</h3>
+                                                <p className="price">-</p>
                                                 <p className="unit">1 kWh</p>
                                             </div>
                                         </div>
@@ -107,18 +123,24 @@ export default function RatePage() {
                                     <div className="region-rates">
                                         <div className="rate-region luzon">
                                         <h3 className="heading">Luzon</h3>
-                                        <p className="price">{rates.price_luzon}</p>
+                                        <div style={{display:"flex", alignItems:"baseline", }}>
+                                            <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>P</p>
+                                            <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price_luzon}</p>
+                                        </div>
                                         <p className="unit">1 kWh</p>
                                         </div>
                                         <div className="rate-region mindanao">
                                         <h3 className="heading">Mindanao</h3>
-                                        <p className="price">{rates.price_mindanao}</p>
+                                        <div style={{display:"flex", alignItems:"baseline", }}>
+                                            <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>P</p>
+                                            <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price_mindanao}</p>
+                                        </div>
                                         <p className="unit">1 kWh</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="rate-info-card">
+                                <div className="rate-info-card" style={{paddingBottom:"30px"}}>
                                     <h3 className="heading" style={{textAlign:"left"}}>Energy Calculator</h3>
                                     <input type='text'
                                         id='energyUsage'
@@ -128,9 +150,13 @@ export default function RatePage() {
                                         placeholder="Enter energy usage"
                                         value={inputtedValue}
                                         onChange={(e) => setInputtedValue(e.target.value)}
-                                        style={{backgroundColor:"#F6F6F6", color:"#A6A6A6"}} />
-                                    <button className="button" onClick={handleCalculation}>Calculate</button>
-                                    <p style={{marginTop:"40px", fontFamily:"Roboto-SemiBold, Helvetica", fontWeight:"600", color:"#04364A"}}>&gt; {output} {!output ? <></>:<>php</>}</p>
+                                        style={{backgroundColor:"#F6F6F6", color:"#A6A6A6", marginLeft:"50px"}} />
+                                    <input type='text'
+                                        disabled="true"
+                                        className="input-field"
+                                        placeholder={output ? `${output} php` : ""}
+                                        style={{backgroundColor:"#D9D9D9", color:"#ffffff", marginLeft:"50px"}} />
+                                    <button className="button" style={{marginLeft:"50px"}}onClick={handleCalculation}>Calculate</button>
                                 </div>
                         </div>
                 </div>

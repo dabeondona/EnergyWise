@@ -25,6 +25,7 @@ export default function LoginPage() {
                 username,
                 password
             });
+
             localStorage.setItem('token', adminLoginResponse.data.jwtToken);
             setAuth(true);
             navigate('/admin-dashboard'); // Redirect to admin dashboard
