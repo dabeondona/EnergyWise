@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
-import "./RP-Styling.css";
+import "./css/RP-Styling.css";
 
 export default function RegistrationPage() {
     let navigate = useNavigate();
@@ -84,6 +84,7 @@ export default function RegistrationPage() {
             <nav className="navbar-sub">
                 <Link to="/" className="heading-a">HOME</Link>
                 <Link to="/about-us" className="heading-a">ABOUT US</Link>
+                <Link to="/contact-us" className="heading-a">CONTACT</Link>
                 <Link to="/pricing" className="heading-a">PRICING</Link>
             </nav>
         );

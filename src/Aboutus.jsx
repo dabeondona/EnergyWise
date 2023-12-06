@@ -1,11 +1,11 @@
 import React from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
-import "./App.css";
+import "./css/App.css";
 import { Navbar, Nav } from "react-bootstrap";
 import { useNavigate, Link } from "react-router-dom";
-import "./LandingPage.css";
-import "./Aboutus.css";
+import "./css/LandingPage.css";
+import "./css/Aboutus.css";
 
 const AboutUs = () => {
   
@@ -31,7 +31,8 @@ const AboutUs = () => {
                       <Nav className="nav-links mr-auto">
                         <Link to="/" className="nav-links">HOME</Link>
                         <Link to="/about-us" className="nav-links">ABOUT US</Link>
-                        <Link href="/pricing" className="nav-links">PRICING</Link>
+                        <Link to="/contact-us" className="nav-links">CONTACT</Link>
+                        <Link to="/pricing" className="nav-links">PRICING</Link>
                       </Nav>
                       <div className="button-main">
                         <button onClick={handleLoginClick}>LOG IN</button>
@@ -204,6 +205,7 @@ const AboutUs = () => {
                   </div>
                 
                 </div>
+                <p className="motto">When in Doubt, use ChatGPT</p>
             </div>    
 
         <div className="container-7">

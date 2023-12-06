@@ -1,0 +1,85 @@
+.input-field {
+    width: 80%;
+    height: 16px;
+    padding: 22px 20px; 
+    border: none;
+    margin: 8px auto;
+    border-radius: 10px;
+    background-color: #ffffff;
+    font-family: "Roboto-Bold", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  ul.checkmark {
+    list-style-type: none; 
+    padding-left: 0;
+    margin-left: 1em; 
+  }
+  
+  ul.checkmark li::before {
+    content: "\2713\0020"; 
+    color: black; 
+  }
+
+  .pricing-display {
+    font-family: "Roboto-Bold", Helvetica;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    font-size: 2rem; 
+  }
+  
+  .currency-symbol {
+    font-family: "Roboto-Bold", Helvetica;
+    font-size: 1.5rem; 
+    margin-right: 0.5rem;
+  }
+  
+  .price-amount {
+    font-family: "Roboto-Bold", Helvetica;
+    font-size: 4rem; 
+    font-weight: bold;
+  }
+  
+  .per-month {
+    font-family: "Roboto-Bold", Helvetica;
+    font-size: 1rem; 
+    margin-left: 0.5rem;
+  }
+
+  .shadows {
+    box-shadow:
+      0px 5.8px 5.3px rgba(0, 0, 0, 0.008),
+      0px 19.4px 17.9px rgba(0, 0, 0, 0.012),
+      0px 87px 80px rgba(0, 0, 0, 0.02)
+    ;
+  }
+
+  .contact-container {
+    max-width: 600px; 
+    margin: auto;
+    padding: 40px;
+    background-color: #F5FCFF;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+  }
+
+  .contact-form-container {
+    /* Adjust the width as necessary */
+    max-width: 500px; /* or 50% if you prefer percentage widths */
+    padding: 20px;
+    /* Add additional styles for the form container here */
+  }
+  
+  .address-support-container {
+    /* Adjust the width as necessary */
+    max-width: 500px; /* or 50% if you prefer percentage widths */
+    padding: 20px;
+    /* Add additional styles for the address/support container here */
+  }
+  
+
+  

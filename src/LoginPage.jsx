@@ -1,8 +1,8 @@
 import React, {useState, useRef, useContext} from "react";
-import AuthContext from "./context/AuthProvider";
+import { AuthContext } from "./context/AuthProvider";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
-import "./LP-Styling.css";
+import "./css/LP-Styling.css";
 
 export default function LoginPage() {
     const { setAuth } = useContext(AuthContext);
@@ -20,24 +20,33 @@ export default function LoginPage() {
         setErrMsg('');
 
         try {
-            const response = await axios.post('http://localhost:8080/user/login', {
+            const loginResponse = await axios.post('http://localhost:8080/user/login', {
                 username,
                 password
             });
+            localStorage.setItem('token', loginResponse.data.jwtToken);
     
-            localStorage.setItem('token', response.data.jwtToken); 
-            setAuth({ username, ...response.data.userData });
-    
-            navigate('/testpage'); 
+            const userDetailsResponse = await axios.get('http://localhost:8080/user/getUserDetails', { 
+                params: { username: username }, 
+                headers: { Authorization: `Bearer ${loginResponse.data.jwtToken}` }
+            });
+            const userDetails = userDetailsResponse.data;
+            console.log('User Details:', userDetails);
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+            
+            setAuth(true);
+            navigate('/rate');
+
         } catch (err) {
             if (!err.response) {
                 setErrMsg('No server response.');
             } else if (err.response.status === 401) {
                 setErrMsg('Unauthorized. Please check your username and password.');
+                alert('Incorrect username or password.');
             } else {
                 setErrMsg('Login failed. Please try again later.');
+                alert('Login failed. Please try again later.');
             }
-            errRef.current.focus(); 
         }
     };
     
@@ -50,6 +59,7 @@ export default function LoginPage() {
             <nav className="navbar-sub">
                 <Link to="/" className="heading-a">HOME</Link>
                 <Link to="/about-us" className="heading-a">ABOUT US</Link>
+                <Link to="/contact-us" className="heading-a">CONTACT</Link>
                 <Link to="/pricing" className="heading-a">PRICING</Link>
             </nav>
         );
