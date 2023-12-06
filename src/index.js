@@ -10,6 +10,8 @@ import PricingPage from './PricingPage';
 import PrivateRoute from './PrivateRoute';
 import reportWebVitals from './reportWebVitals';
 import RegistrationPage from './RegistrationPage';
+import AdminDashboard from './AdminDashboard';
+import UserListPage from './UserListPage';
 import { AuthProvider } from './context/AuthProvider';
 import ContactPage from './ContactPage';
 
@@ -28,7 +30,13 @@ root.render(
           <RatePage />
           </PrivateRoute>} />
         <Route path="/about-us" element={<Aboutus />} />
-        <Route path="/registration" element={<RegistrationPage/>} />
+        <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/admin-dashboard" element={ <PrivateRoute>
+          <AdminDashboard />
+          </PrivateRoute>} />
+        <Route path="/user-lists" element={<PrivateRoute>
+          <UserListPage/>
+        </PrivateRoute>} />
       </Routes>
     </BrowserRouter>
     </AuthProvider>

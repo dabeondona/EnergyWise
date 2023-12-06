@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AuthContext } from "./context/AuthProvider";
+import AuthContext from "./context/AuthProvider";
 import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import "./css/LP-Styling.css"
