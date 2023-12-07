@@ -1,44 +1,49 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ReactDOM from 'react-dom/client';
-import './css/index.css';
-import LandingPage from './LandingPage';
-import LoginPage from './LoginPage';
-import Aboutus from './Aboutus';
-import RatePage from './RatePage';
-import PricingPage from './PricingPage';
-import PrivateRoute from './PrivateRoute';
-import reportWebVitals from './reportWebVitals';
-import RegistrationPage from './RegistrationPage';
-import AdminDashboard from './AdminDashboard';
-import UserListPage from './UserListPage';
-import { AuthProvider } from './context/AuthProvider';
-import ContactPage from './ContactPage';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Aboutus from "./Aboutus";
+import CalendarPage from "./CalendarPage";
+import ContactPage from "./ContactPage";
+import LandingPage from "./LandingPage";
+import LoginPage from "./LoginPage";
+import PricingPage from "./PricingPage";
+import PrivateRoute from "./PrivateRoute";
+import RatePage from "./RatePage";
+import RegistrationPage from "./RegistrationPage";
+import { AuthProvider } from "./context/AuthProvider";
+import "./css/index.css";
+import reportWebVitals from "./reportWebVitals";
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/contact-us" element={<ContactPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/rate" element={<PrivateRoute>
-          <RatePage />
-          </PrivateRoute>} />
-        <Route path="/about-us" element={<Aboutus />} />
-        <Route path="/registration" element={<RegistrationPage />} />
-        <Route path="/admin-dashboard" element={ <PrivateRoute>
-          <AdminDashboard />
-          </PrivateRoute>} />
-        <Route path="/user-lists" element={<PrivateRoute>
-          <UserListPage/>
-        </PrivateRoute>} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/contact-us" element={<ContactPage />} />
+          <Route path="/pricing" element={<PricingPage />} />
+          <Route
+            path="/rate"
+            element={
+              <PrivateRoute>
+                <RatePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/calendar"
+            element={
+              <PrivateRoute>
+                <CalendarPage />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/about-us" element={<Aboutus />} />
+          <Route path="/registration" element={<RegistrationPage />} />
+        </Routes>
+      </BrowserRouter>
     </AuthProvider>
   </React.StrictMode>
 );

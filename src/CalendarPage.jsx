@@ -1,7 +1,7 @@
 import { addDays, addMonths, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, startOfMonth, startOfWeek, subMonths } from 'date-fns';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import './css/Calendar.css';
+import './css/CalendarPage.css';
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
