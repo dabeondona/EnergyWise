@@ -81,7 +81,7 @@ export default function RatePage() {
                     <li><NavLink to="/calendar" activeClassName="active">Calendar</NavLink></li>
                     <li><NavLink to="/tips" activeClassName="active">Tips</NavLink></li>
                     <li><NavLink to="/goals" activeClassName="active">Goals</NavLink></li>
-                    <hr style={{marginTop:"400px"}}></hr>
+                    <hr style={{marginTop:"200px"}}></hr>
                     <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
                 </ul>
             </div>
