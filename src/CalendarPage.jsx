@@ -1,3 +1,4 @@
+import { Box, Button, Modal, Typography } from '@mui/material'; // Import Material-UI components
 import { addDays, addMonths, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, startOfMonth, startOfWeek, subMonths } from 'date-fns';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -53,6 +54,17 @@ const Calendar = () => {
   const closeEventDetails = () => {
     setEventDetailsVisible(false);
   };
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   return (
     <div className="calendar">
@@ -102,13 +114,24 @@ const Calendar = () => {
         </div>
       )}
       {eventDetailsVisible && (
-        <div className="event-details-modal">
-          <div className="event-details-content">
-            <p>Event details for {currentEventDate ? format(currentEventDate, 'MMMM dd, yyyy') : ''}:</p>
-            <p>{events[currentEventDate ? format(currentEventDate, 'yyyy-MM-dd') : '']}</p>
-            <button onClick={closeEventDetails}>Close</button>
-          </div>
-        </div>
+        <Modal
+          open={eventDetailsVisible}
+          onClose={closeEventDetails}
+          aria-labelledby="event-details-modal-title"
+          aria-describedby="event-details-modal-description"
+        >
+          <Box className="event-details-modal" sx={style}>
+            <div className="event-details-content">
+              <Typography variant="h6" id="event-details-modal-title">
+                Event details for {currentEventDate ? format(currentEventDate, 'MMMM dd, yyyy') : ''}:
+              </Typography>
+              <Typography id="event-details-modal-description">
+                {events[currentEventDate ? format(currentEventDate, 'yyyy-MM-dd') : '']}
+              </Typography>
+              <Button onClick={closeEventDetails}>Close</Button>
+            </div>
+          </Box>
+        </Modal>
       )}
     </div>
   );
