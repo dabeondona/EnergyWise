@@ -20,36 +20,58 @@ export default function LoginPage() {
         setErrMsg('');
 
         try {
-            // Attempt admin login
             const adminLoginResponse = await axios.post('http://localhost:8080/admin/login', {
                 username,
                 password
             });
             localStorage.setItem('token', adminLoginResponse.data.jwtToken);
+            await fetchAdminDetails(username);
             setAuth(true);
-            navigate('/admin-dashboard'); // Redirect to admin dashboard
+            navigate('/admin-dashboard');
 
         } catch (adminError) {
-            if (adminError.response && adminError.response.status === 401) {
+            if ((adminError.response && adminError.response.status === 401) || (adminError.response && adminError.response.status === 404)) {
                 try {
-                    // If admin login fails, try user login
                     const userLoginResponse = await axios.post('http://localhost:8080/user/login', {
                         username,
                         password
                     });
-                    console.log(userLoginResponse.data.jwtToken)
                     localStorage.setItem('token', userLoginResponse.data.jwtToken);
+                    console.log(localStorage.getItem('token'))
+                    await fetchUserDetails(username);
                     setAuth(true);
-                    navigate('/rate'); // Redirect to user dashboard
+                    navigate('/rate'); 
 
                 } catch (userError) {
-                    // Handle user login failure
                     handleLoginError(userError);
                 }
             } else {
-                // Handle other errors for admin login
                 handleLoginError(adminError);
             }
+        }
+    };
+
+    const fetchUserDetails = async (username) => {
+        try {
+            const userDetailsResponse = await axios.get(`http://localhost:8080/user/getUserDetails`, {
+                params: { username }
+            });
+
+            localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
+        } catch (error) {
+            console.error('Failed to fetch details:', error);
+        }
+    };
+
+    const fetchAdminDetails = async (username) => {
+        try {
+            const adminDetailsResponse = await axios.get(`http://localhost:8080/admin/getAdminDetails`, {
+                params: { username }
+            });
+
+            localStorage.setItem('adminDetails', JSON.stringify(adminDetailsResponse.data));
+        } catch (error) {
+            console.error('Failed to fetch details:', error);
         }
     };
 

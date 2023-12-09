@@ -5,6 +5,12 @@ import axios from 'axios';
 import "./css/LP-Styling.css"
 import "./css/R-Styling.css"
 
+const NotificationItem = ({ message }) => (
+    <div className="notification-item" style={{backgroundColor:"#73D2F8", margin:"10px", padding:"10px", borderRadius:"10px"}}>
+      {message}
+    </div>
+  );
+
 export default function RatePage() {
     const [vnotif, setVNotif] = useState(false);
     const [vprof, setVProf] = useState(false);
@@ -48,6 +54,11 @@ export default function RatePage() {
             setVNotif(false);
         }
     }
+
+    const [notifications, setNotifications] = useState([
+        { id: 1, message: "Notification 1" },
+        { id: 2, message: "Notification 2" },
+    ]);
 
     const fetchCurrentMonthRate = async () => {
         try {
@@ -104,10 +115,14 @@ export default function RatePage() {
                     <div style={{marginLeft:"30px",  marginTop:"45px", position:"relative", left:"70%"}}>
                         <button onClick={handleNotifVisibility}>Notifications</button>
                         <button>Profile</button>
-                        {vnotif ? <div style={{position: "fixed", top:"90px", backgroundColor:"#808080", paddingTop:"50px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"50px", left:"1500px", borderRadius:"20px"}}>
-                            <h1 className="heading" style={{color:"#ffffff", marginBottom:"0px"}}>Notifications</h1>
-                            <div style={{backgroundColor:"#73D2F8", margin:"50px"}}>test</div>
-                        </div>:<></>}
+                        {vnotif && (
+                            <div className="notification-container" style={{position: "absolute", top:"45px", right:"0", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
+                                <h1 className="heading" style={{color:"#ffffff", marginBottom:"10px"}}>Notifications</h1>
+                                {notifications.map((notif) => (
+                                    <NotificationItem key={notif.id} message={notif.message} />
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
                 <hr style={{width:"96%"}}></hr>
