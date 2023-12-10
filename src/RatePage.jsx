@@ -113,7 +113,9 @@ export default function RatePage() {
                         <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
                     </div>
                     <div style={{marginLeft:"30px",  marginTop:"45px", position:"relative", left:"70%"}}>
-                        <button onClick={handleNotifVisibility}>Notifications</button>
+                        <button onClick={handleNotifVisibility} style={{border:'none', padding:'0px', margin:'0px'}}>
+                            <img src="testnotif.png" style={{height: '50px' }}/>
+                        </button>
                         <button>Profile</button>
                         {vnotif && (
                             <div className="notification-container" style={{position: "absolute", top:"45px", right:"0", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
@@ -135,7 +137,7 @@ export default function RatePage() {
                                             <div className="rate-region luzon">
                                                 <h3 className="heading">{lastMonthName}</h3> {/* to be changed */}
                                                 <div style={{display:"flex", alignItems:"baseline", }}>
-                                                    <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>P</p>
+                                                    <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>₱</p>
                                                     <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price - 2}</p>
                                                 </div>{/* to be changed */}
                                                 <p className="unit">1 kWh</p>
@@ -143,7 +145,7 @@ export default function RatePage() {
                                             <div className="rate-region mindanao">
                                                 <h3 className="heading" style={{color:"#F3DC8B"}}>{rates.month}</h3>
                                                 <div style={{display:"flex", alignItems:"baseline", }}>
-                                                    <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>P</p>
+                                                    <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>₱</p>
                                                     <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price}</p>
                                                 </div>
                                                 <p className="unit">1 kWh</p>
@@ -161,7 +163,7 @@ export default function RatePage() {
                                         <div className="rate-region luzon">
                                         <h3 className="heading">Luzon</h3>
                                         <div style={{display:"flex", alignItems:"baseline", }}>
-                                            <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>P</p>
+                                            <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>₱</p>
                                             <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price_luzon}</p>
                                         </div>
                                         <p className="unit">1 kWh</p>
@@ -169,7 +171,7 @@ export default function RatePage() {
                                         <div className="rate-region mindanao">
                                         <h3 className="heading">Mindanao</h3>
                                         <div style={{display:"flex", alignItems:"baseline", }}>
-                                            <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>P</p>
+                                            <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>₱</p>
                                             <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price_mindanao}</p>
                                         </div>
                                         <p className="unit">1 kWh</p>
@@ -191,7 +193,7 @@ export default function RatePage() {
                                     <input type='text'
                                         disabled="true"
                                         className="input-field"
-                                        placeholder={output ? `${output} php` : ""}
+                                        placeholder={output ? `₱ ${output}` : ""}
                                         style={{backgroundColor:"#D9D9D9", color:"#ffffff", marginLeft:"50px"}} />
                                     <button className="button" style={{marginLeft:"50px"}}onClick={handleCalculation}>Calculate</button>
                                 </div>
