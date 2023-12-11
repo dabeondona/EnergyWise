@@ -13,16 +13,14 @@ export default function RatePage() {
         price_mindanao: null,
     });
 
-    // PLACEHOLDER -------------------------------------------------------------------------------------------------
     const currentDate = new Date();
-    const currentMonth = currentDate.getMonth(); 
+    const currentMonth = currentDate.getMonth();
     const lastMonth = new Date(currentDate.setMonth(currentMonth - 1));
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
     const lastMonthName = monthNames[lastMonth.getMonth()];
-    // ENDS HERE -------------------------------------------------------------------------------------------------
 
     const [inputtedValue, setInputtedValue] = useState('');
     const [currentRate, setCurrentRate] = useState(null);

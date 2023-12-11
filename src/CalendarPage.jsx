@@ -1,5 +1,17 @@
-import { Box, Button, Modal, Typography } from '@mui/material'; // Import Material-UI components
-import { addDays, addMonths, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, startOfMonth, startOfWeek, subMonths } from 'date-fns';
+import { ArrowBack, ArrowForward } from '@mui/icons-material';
+import { Box, Button, IconButton, Modal, Typography } from '@mui/material';
+import {
+  addDays,
+  addMonths,
+  endOfMonth,
+  endOfWeek,
+  format,
+  isSameDay,
+  isSameMonth,
+  startOfMonth,
+  startOfWeek,
+  subMonths
+} from 'date-fns';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './css/CalendarPage.css';
@@ -10,6 +22,8 @@ const Calendar = () => {
   const [eventFormVisible, setEventFormVisible] = useState(false);
   const [events, setEvents] = useState({});
   const [eventDetailsVisible, setEventDetailsVisible] = useState(false);
+  const userDetails = JSON.parse(localStorage.getItem('userDetails')); // userDetails.firstName, lastName, email, username
+
   const [currentEventDate, setCurrentEventDate] = useState(null);
 
   const getDaysInMonth = () => {
@@ -54,6 +68,7 @@ const Calendar = () => {
   const closeEventDetails = () => {
     setEventDetailsVisible(false);
   };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -80,10 +95,20 @@ const Calendar = () => {
           <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
         </ul>
       </div>
+      <div style={{ marginLeft: "300px", marginTop: "25px" }}>
+        <h3 className="">EnergyRate</h3>
+        <p>Hi, Welcome {userDetails.username}!</p>
+        <hr></hr>
+      </div>
+
       <div className="header">
-        <button onClick={prevMonth}>&lt;</button>
+        <IconButton onClick={prevMonth} aria-label="previous-month" className="icon-button">
+          <ArrowBack />
+        </IconButton>
         <h2>{format(currentDate, 'MMMM yyyy')}</h2>
-        <button onClick={nextMonth}>&gt;</button>
+        <IconButton onClick={nextMonth} aria-label="next-month" className="icon-button">
+          <ArrowForward />
+        </IconButton>
       </div>
       <div className="days">
         {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
