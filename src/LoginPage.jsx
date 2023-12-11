@@ -58,7 +58,7 @@ export default function LoginPage() {
             });
 
             localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
-        } catch (error) {
+        } catch(error) {
             console.error('Failed to fetch details:', error);
         }
     };
@@ -70,7 +70,7 @@ export default function LoginPage() {
             });
 
             localStorage.setItem('adminDetails', JSON.stringify(adminDetailsResponse.data));
-        } catch (error) {
+        } catch(error) {
             console.error('Failed to fetch details:', error);
         }
     };

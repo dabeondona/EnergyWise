@@ -5,21 +5,17 @@ import axios from 'axios';
 import "./css/LP-Styling.css"
 import "./css/R-Styling.css"
 
-// To be utilized for building and testing functionalities
-export default function TestPage() {
+export default function ProfileSettings() {
 
     let navigate = useNavigate();
-
-    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
 
+    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [isPasswordValid, setIsPasswordValid] = useState(false);
-    const [doPasswordsMatch, setDoPasswordsMatch] = useState(false);
 
     const [fieldvis1, setFieldVis1] = useState(true);
     const [fieldvis2, setFieldVis2] = useState(true);
@@ -28,17 +24,6 @@ export default function TestPage() {
 
     const { auth } = useContext(AuthContext);
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
-
-    const handlePasswordChange = (password) => {
-        setPassword(password);
-        setIsPasswordValid(PWD_REGEX.test(password));
-        setDoPasswordsMatch(password === confirmPassword);
-    };
-    
-    const handleConfirmPasswordChange = (confirmPwd) => {
-        setConfirmPassword(confirmPwd);
-        setDoPasswordsMatch(password === confirmPwd);
-    };    
 
     function handleVisibility1() {
         if(fieldvis1) {
@@ -73,10 +58,6 @@ export default function TestPage() {
     }
 
     async function handleUpdate() {   
-        if (!isPasswordValid || !doPasswordsMatch) {
-            alert('Password is invalid or does not match');
-            return;
-        }
 
         const isConfirmed = window.confirm('Are you sure you want to do this?');
 
@@ -198,23 +179,21 @@ export default function TestPage() {
                     <input type={fieldvis4 ? "password" : "text"} 
                         className="input-field" 
                         placeholder="Enter Password" 
-                        onChange={(e) => handlePasswordChange(e.target.value)}
                         style={{backgroundColor: fieldvis4 ? "#D9D9D9" : "#F6F6F6", color:"#A6A6A6", marginLeft:"30px", marginRight:"40px", width:"230%"}}/>
-                        <button className='button' onClick={handleVisibility4}>VISIBLE</button>
+                        <button className='button' onClick={handleVisibility4}>CHANGE</button>
                 </div>
 
                 <div style={{display:"flex"}}>
                     <h5>Re-enter Password:</h5>
                     <input type='text' 
                         className="input-field" 
-                        onChange={(e) => handleConfirmPasswordChange(e.target.value)}   
                         style={{backgroundColor:"#F6F6F6", color:"#A6A6A6", marginLeft:"50px"}}/>
                 </div>
             </div>
 
             <div>
                 <div style={{marginLeft:"800px", marginTop:"40px", justifyContent:"center", alignItems:"center"}}>
-                    <button className='button' style={{width:"40%", backgroundColor: !isPasswordValid || !doPasswordsMatch ? 'gray' : '#73D2F8'}} disabled={!isPasswordValid || !doPasswordsMatch} onClick={handleUpdate}>CONFIRM</button>
+                    <button className='button' style={{width:"40%"}}onClick={handleUpdate}>CONFIRM</button>
                 </div>
             </div>
 
