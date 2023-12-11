@@ -95,7 +95,7 @@ const Calendar = () => {
           <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
         </ul>
       </div>
-      <div style={{ marginLeft: "300px", marginTop: "25px" }}>
+      <div style={{ marginLeft: "-900px", marginTop: "25px" }}>
         <h3 className="">EnergyRate</h3>
         <p>Hi, Welcome {userDetails.username}!</p>
         <hr></hr>

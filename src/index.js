@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Aboutus from "./Aboutus";
 import AdminDashboard from "./AdminDashboard";
+import CalendarPage from "./CalendarPage";
 import ContactPage from "./ContactPage";
 import LandingPage from "./LandingPage";
 import LoginPage from "./LoginPage";
@@ -25,6 +26,7 @@ root.render(
           <Route path="/login" element={<LoginPage />} />
           <Route path="/contact-us" element={<ContactPage />} />
           <Route path="/pricing" element={<PricingPage />} />
+          <Route path="/Calendar" element={<CalendarPage />} />
           <Route
             path="/rate"
             element={
