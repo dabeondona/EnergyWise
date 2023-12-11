@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Aboutus from "./Aboutus";
-import CalendarPage from "./CalendarPage";
+import AdminDashboard from "./AdminDashboard";
 import ContactPage from "./ContactPage";
 import LandingPage from "./LandingPage";
 import LoginPage from "./LoginPage";
@@ -10,6 +10,7 @@ import PricingPage from "./PricingPage";
 import PrivateRoute from "./PrivateRoute";
 import RatePage from "./RatePage";
 import RegistrationPage from "./RegistrationPage";
+import UserListPage from "./UserListPage";
 import { AuthProvider } from "./context/AuthProvider";
 import "./css/index.css";
 import reportWebVitals from "./reportWebVitals";
@@ -32,16 +33,24 @@ root.render(
               </PrivateRoute>
             }
           />
+          <Route path="/about-us" element={<Aboutus />} />
+          <Route path="/registration" element={<RegistrationPage />} />
           <Route
-            path="/calendar"
+            path="/admin-dashboard"
             element={
               <PrivateRoute>
-                <CalendarPage />
+                <AdminDashboard />
               </PrivateRoute>
             }
           />
-          <Route path="/about-us" element={<Aboutus />} />
-          <Route path="/registration" element={<RegistrationPage />} />
+          <Route
+            path="/user-lists"
+            element={
+              <PrivateRoute>
+                <UserListPage />
+              </PrivateRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
