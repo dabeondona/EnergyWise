@@ -1,12 +1,14 @@
+/* Calendar Container */
 .calendar {
   width: 600px;
-  margin: auto;
+  margin: auto; /* Center the calendar horizontally */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: 'Roboto', sans-serif;
 }
+
 
 .header {
   display: flex;
