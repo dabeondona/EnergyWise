@@ -124,7 +124,7 @@ const Calendar = () => {
             <h3 className="heading" style={{ textAlign: "left", marginBottom: "10px", marginTop: "40px", marginLeft: "25px" }}>Calendar</h3>
             <p style={{ fontFamily: "Robot-Medium, Helvetica", fontWeight: "550", fontSize: "12.5px", color: "#04364A", marginLeft: "25px" }}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
           </div>
-          <div style={{ marginLeft: "30px", marginTop: "45px", position: "relative", left: "70%" }}>
+          <div style={{ marginLeft: "30px", marginTop: "45px", position: "relative", left: "250%" }}>
             <button onClick={handleNotifVisibility} style={{ border: 'none', padding: '0px', margin: '0px' }}>
               <img src="testnotif.png" style={{ height: '50px' }} />
             </button>
@@ -139,7 +139,7 @@ const Calendar = () => {
             )}
           </div>
         </div>
-        <hr style={{ width: "96%" }}></hr>
+        <hr style={{ width: "350%" }}></hr>
       </div>
 
       <div className="header">
