@@ -87,7 +87,7 @@ export default function RatePage() {
             </div>
             <div style={{marginLeft:"300px", marginTop:"25px"}}>
                 <h3 className="">EnergyRate</h3>
-                <p>Hi, Welcome {userDetails.username}!</p>t
+                <p>Hi, Welcome {userDetails.username}!</p>
                 <hr></hr>
             </div>
                 <div className="rate-page-container">
