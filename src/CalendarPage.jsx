@@ -130,7 +130,7 @@ const Calendar = () => {
         </div>
         <hr style={{ width: "345%" }}></hr>
       </div>
-
+      <div>         
       <div className="header">
         <IconButton onClick={prevMonth} aria-label="previous-month" className="icon-button">
           <ArrowBack />
@@ -188,7 +188,9 @@ const Calendar = () => {
           </Box>
         </Modal>
       )}
+      </div>
     </div>
+    
   );
 };
 
