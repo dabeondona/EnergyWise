@@ -1,3 +1,6 @@
+import React, {useState, useRef, useContext} from "react";
+import {AuthContext} from "./context/AuthProvider";
+import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 import React, { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,36 +23,74 @@ export default function LoginPage() {
         setErrMsg('');
 
         try {
-            const loginResponse = await axios.post('http://localhost:8080/user/login', {
+            const adminLoginResponse = await axios.post('http://localhost:8080/admin/login', {
                 username,
                 password
             });
-            localStorage.setItem('token', loginResponse.data.jwtToken);
-    
-            const userDetailsResponse = await axios.get('http://localhost:8080/user/getUserDetails', { 
-                params: { username: username }, 
-                headers: { Authorization: `Bearer ${loginResponse.data.jwtToken}` }
-            });
-            const userDetails = userDetailsResponse.data;
-            console.log('User Details:', userDetails);
-            localStorage.setItem('userDetails', JSON.stringify(userDetails));
-            
+            localStorage.setItem('token', adminLoginResponse.data.jwtToken);
+            await fetchAdminDetails(username);
             setAuth(true);
-            navigate('/rate');
+            navigate('/admin-dashboard');
 
-        } catch (err) {
-            if (!err.response) {
-                setErrMsg('No server response.');
-            } else if (err.response.status === 401) {
-                setErrMsg('Unauthorized. Please check your username and password.');
-                alert('Incorrect username or password.');
+        } catch (adminError) {
+            if ((adminError.response && adminError.response.status === 401) || (adminError.response && adminError.response.status === 404)) {
+                try {
+                    const userLoginResponse = await axios.post('http://localhost:8080/user/login', {
+                        username,
+                        password
+                    });
+                    localStorage.setItem('token', userLoginResponse.data.jwtToken);
+                    console.log(localStorage.getItem('token'))
+                    await fetchUserDetails(username);
+                    setAuth(true);
+                    navigate('/rate'); 
+
+                } catch (userError) {
+                    handleLoginError(userError);
+                }
             } else {
-                setErrMsg('Login failed. Please try again later.');
-                alert('Login failed. Please try again later.');
+                handleLoginError(adminError);
             }
         }
     };
-    
+
+    const fetchUserDetails = async (username) => {
+        try {
+            const userDetailsResponse = await axios.get(`http://localhost:8080/user/getUserDetails`, {
+                params: { username }
+            });
+
+            localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
+        } catch(error) {
+            console.error('Failed to fetch details:', error);
+        }
+    };
+
+    const fetchAdminDetails = async (username) => {
+        try {
+            const adminDetailsResponse = await axios.get(`http://localhost:8080/admin/getAdminDetails`, {
+                params: { username }
+            });
+
+            localStorage.setItem('adminDetails', JSON.stringify(adminDetailsResponse.data));
+        } catch(error) {
+            console.error('Failed to fetch details:', error);
+        }
+    };
+
+    const handleLoginError = (error) => {
+        if (!error.response) {
+            setErrMsg('No server response.');
+        } else if (error.response.status === 401) {
+            setErrMsg('Unauthorized. Please check your username and password.');
+            console.log(error)
+            alert('Incorrect username or password.');
+        } else {
+            setErrMsg('Login failed. Please try again later.');
+            alert('Login failed. Please try again later.');
+        }
+    };
+        
     const handleRegisterNow = () => {
         navigate('/registration'); 
     };
