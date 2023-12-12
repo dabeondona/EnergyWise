@@ -16,7 +16,22 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './css/CalendarPage.css';
 
+
+
+const NotificationItem = ({ message }) => (
+  <div className="notification-item" style={{ backgroundColor: "#73D2F8", margin: "10px", padding: "10px", borderRadius: "10px" }}>
+    {message}
+  </div>
+);
+
+
+
 const Calendar = () => {
+  const [notifications, setNotifications] = useState([
+    { id: 1, message: "Notification 1" },
+    { id: 2, message: "Notification 2" },
+  ]);
+  const [vnotif, setVNotif] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
   const [eventFormVisible, setEventFormVisible] = useState(false);
@@ -69,6 +84,14 @@ const Calendar = () => {
     setEventDetailsVisible(false);
   };
 
+  function handleNotifVisibility() {
+    if(!vnotif) {
+        setVNotif(true);
+    } else {
+        setVNotif(false);
+    }
+}
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -95,10 +118,28 @@ const Calendar = () => {
           <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
         </ul>
       </div>
-      <div style={{ marginLeft: "-900px", marginTop: "25px",}}>
-        <h3 className="">EnergyRate</h3>
-        <p>Hi, Welcome {userDetails.username}!</p>
-        <hr></hr>
+      <div style={{ marginLeft: "-600px" }}>
+        <div style={{ display: "flex", flex: "1" }}>
+          <div>
+            <h3 className="heading" style={{ textAlign: "left", marginBottom: "10px", marginTop: "40px", marginLeft: "25px" }}>Calendar</h3>
+            <p style={{ fontFamily: "Robot-Medium, Helvetica", fontWeight: "550", fontSize: "12.5px", color: "#04364A", marginLeft: "25px" }}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
+          </div>
+          <div style={{ marginLeft: "30px", marginTop: "45px", position: "relative", left: "70%" }}>
+            <button onClick={handleNotifVisibility} style={{ border: 'none', padding: '0px', margin: '0px' }}>
+              <img src="testnotif.png" style={{ height: '50px' }} />
+            </button>
+            <button>Profile</button>
+            {vnotif && (
+              <div className="notification-container" style={{ position: "absolute", top: "45px", right: "0", backgroundColor: "#808080", paddingTop: "10px", paddingRight: "25px", paddingLeft: "25px", paddingBottom: "10px", borderRadius: "20px", zIndex: 100 }}>
+                <h1 className="heading" style={{ color: "#ffffff", marginBottom: "10px" }}>Notifications</h1>
+                {notifications.map((notif) => (
+                  <NotificationItem key={notif.id} message={notif.message} />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        <hr style={{ width: "96%" }}></hr>
       </div>
 
       <div className="header">
@@ -135,7 +176,7 @@ const Calendar = () => {
       {eventFormVisible && (
         <div className="event-form">
           <textarea placeholder="Enter event details..." onChange={(e) => setEvents((prevEvents) => ({ ...prevEvents, [format(selectedDate, 'yyyy-MM-dd')]: e.target.value }))}></textarea>
-          <button onClick={() => handleEventSave(events[format(selectedDate, 'yyyy-MM-dd')])}>Save Event</button>
+          <button onClick={() => handleEventSave(events[format(selectedDate, 'yyyy-MM-dd')])}>Add Event</button>
         </div>
       )}
       {eventDetailsVisible && (
