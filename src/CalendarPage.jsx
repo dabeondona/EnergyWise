@@ -1,17 +1,6 @@
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 import { Box, Button, IconButton, Modal, Typography } from '@mui/material';
-import {
-  addDays,
-  addMonths,
-  endOfMonth,
-  endOfWeek,
-  format,
-  isSameDay,
-  isSameMonth,
-  startOfMonth,
-  startOfWeek,
-  subMonths
-} from 'date-fns';
+import { addDays, addMonths, endOfMonth, endOfWeek, format, isSameDay, isSameMonth, startOfMonth, startOfWeek, subMonths } from 'date-fns';
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import './css/CalendarPage.css';
@@ -139,7 +128,7 @@ const Calendar = () => {
             )}
           </div>
         </div>
-        <hr style={{ width: "350%" }}></hr>
+        <hr style={{ width: "345%" }}></hr>
       </div>
 
       <div className="header">
