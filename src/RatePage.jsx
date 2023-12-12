@@ -2,8 +2,11 @@ import React, { useState, useContext, useEffect } from "react";
 import {AuthContext} from "./context/AuthProvider";
 import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
-import "./css/LP-Styling.css"
-import "./css/R-Styling.css"
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from "./context/AuthProvider";
+import "./css/LP-Styling.css";
+import "./css/R-Styling.css";
 
 const NotificationItem = ({ message }) => (
     <div className="notification-item" style={{backgroundColor:"#73D2F8", margin:"10px", padding:"10px", borderRadius:"10px"}}>
@@ -21,16 +24,14 @@ export default function RatePage() {
         price_mindanao: null,
     });
 
-    // PLACEHOLDER -------------------------------------------------------------------------------------------------
     const currentDate = new Date();
-    const currentMonth = currentDate.getMonth(); 
+    const currentMonth = currentDate.getMonth();
     const lastMonth = new Date(currentDate.setMonth(currentMonth - 1));
 
     const monthNames = ["January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     ];
     const lastMonthName = monthNames[lastMonth.getMonth()];
-    // ENDS HERE -------------------------------------------------------------------------------------------------
 
     const [inputtedValue, setInputtedValue] = useState('');
     const [currentRate, setCurrentRate] = useState(null);
@@ -102,7 +103,7 @@ export default function RatePage() {
                     <li><NavLink to="/calendar" activeClassName="active">Calendar</NavLink></li>
                     <li><NavLink to="/tips" activeClassName="active">Tips</NavLink></li>
                     <li><NavLink to="/goals" activeClassName="active">Goals</NavLink></li>
-                    <hr style={{marginTop:"400px"}}></hr>
+                    <hr style={{marginTop:"200px"}}></hr>
                     <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
                 </ul>
             </div>

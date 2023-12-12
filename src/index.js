@@ -16,8 +16,7 @@ import { AuthProvider } from './context/AuthProvider';
 import ContactPage from './ContactPage';
 import TestPage from './TestPage';
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthProvider>
