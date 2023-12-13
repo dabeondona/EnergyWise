@@ -7,18 +7,16 @@ import './css/CalendarPage.css';
 
 
 
+
 const NotificationItem = ({ message }) => (
   <div className="notification-item" style={{ backgroundColor: "#73D2F8", margin: "10px", padding: "10px", borderRadius: "10px" }}>
     {message}
   </div>
 );
-
-
-
 const Calendar = () => {
-  const [notifications, setNotifications] = useState([
-    { id: 1, message: "Notification 1" },
-    { id: 2, message: "Notification 2" },
+const [notifications, setNotifications] = useState([
+      { id: 1, message: "Notification 1" },
+      { id: 2, message: "Notification 2" },
   ]);
   const [vnotif, setVNotif] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());

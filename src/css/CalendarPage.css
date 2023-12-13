@@ -73,9 +73,9 @@
   color: #fff;
   border: none;
   align-items: center;
-  padding: 10px 15px;
+  padding: 20px 20px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 10px;
 }
 
 .event-form button:hover {
