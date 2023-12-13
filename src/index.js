@@ -11,7 +11,9 @@ import PrivateRoute from './PrivateRoute';
 import reportWebVitals from './reportWebVitals';
 import RegistrationPage from './RegistrationPage';
 import AdminDashboard from './AdminDashboard';
+import PasswordUpdatePage from './PasswordUpdatePage';
 import UserListPage from './UserListPage';
+import ProfileSettingsPage from './ProfileSettingsPage';
 import { AuthProvider } from './context/AuthProvider';
 import ContactPage from './ContactPage';
 import TestPage from './TestPage';
@@ -38,6 +40,12 @@ root.render(
           </PrivateRoute>} />
         <Route path="/test" element={<PrivateRoute>
           <TestPage />
+          </PrivateRoute>} />
+        <Route path="/profilesettings" element={<PrivateRoute>
+          <ProfileSettingsPage />
+          </PrivateRoute>} />
+        <Route path="/updatepassword" element={<PrivateRoute>
+          <PasswordUpdatePage />
           </PrivateRoute>} />
 
 
