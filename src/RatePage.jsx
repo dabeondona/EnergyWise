@@ -2,9 +2,6 @@ import React, { useState, useContext, useEffect } from "react";
 import {AuthContext} from "./context/AuthProvider";
 import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useNavigate } from 'react-router-dom';
-import { AuthContext } from "./context/AuthProvider";
 import "./css/LP-Styling.css";
 import "./css/R-Styling.css";
 

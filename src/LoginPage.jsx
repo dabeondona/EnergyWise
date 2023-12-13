@@ -2,9 +2,6 @@ import React, {useState, useRef, useContext} from "react";
 import {AuthContext} from "./context/AuthProvider";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
-import React, { useContext, useRef, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from "./context/AuthProvider";
 import "./css/LP-Styling.css";
 
 export default function LoginPage() {
