@@ -34,7 +34,7 @@ export default function PasswordUpdatePage() {
     }, [password, confirmPassword])
     
     function navigateToSettings() {
-        navigate('/test')
+        navigate('/profilesettings')
     }
 
     async function handleUpdatePassword() {

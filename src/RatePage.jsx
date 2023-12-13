@@ -58,6 +58,10 @@ export default function RatePage() {
         { id: 2, message: "Notification 2" },
     ]);
 
+    function navigateToProfileSettings() {
+        navigate('/profilesettings')
+    }
+
     const fetchCurrentMonthRate = async () => {
         try {
             const response = await axios.get('http://localhost:8080/rate/getAllRates');
@@ -114,7 +118,7 @@ export default function RatePage() {
                         <button onClick={handleNotifVisibility} style={{border:'none', padding:'0px', margin:'0px'}}>
                             <img src="testnotif.png" style={{height: '50px' }}/>
                         </button>
-                        <button>Profile</button>
+                        <button onClick={navigateToProfileSettings}>Profile</button>
                         {vnotif && (
                             <div className="notification-container" style={{position: "absolute", top:"45px", right:"0", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
                                 <h1 className="heading" style={{color:"#ffffff", marginBottom:"10px"}}>Notifications</h1>
