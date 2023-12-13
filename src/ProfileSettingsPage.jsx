@@ -1,9 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {AuthContext} from "./context/AuthProvider";
-import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
-import "./css/LP-Styling.css"
-import "./css/R-Styling.css"
+import React, { useState } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import "./css/LP-Styling.css";
+import "./css/R-Styling.css";
 
 
 export default function ProfileSettingsPage() {
@@ -126,15 +125,15 @@ export default function ProfileSettingsPage() {
                 </ul>
             </div>
 
-            <div style={{display:"flex", justifyContent:"center", gap:"250px", alignItems:"center", height:"28vh"}}>
-                <img src="energywise_logo.png" width="200px"></img>
+            <div style={{display:"flex", justifyContent:"center", marginLeft:'120px', gap:"30px", alignItems:"center", height:"28vh"}}>
+                <img src={userDetails.picture} width="300"></img>
                 <span style={{marginTop:"35px"}}>
                     <h4 className='heading' style={{textAlign:"left"}}>{userDetails.username}</h4>
                     <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", color:"#04364A"}}>{userDetails.email}</p>
                 </span>
             </div>
 
-            <div style={{marginLeft:"500px"}}>
+            <div style={{marginLeft:"500px", marginTop:"25px"}}>
                 <h3 className="heading" style={{textAlign:"left", marginLeft:"25px"}}>Personal Settings</h3>
                 <hr style={{width:"80%"}}></hr>
             </div>

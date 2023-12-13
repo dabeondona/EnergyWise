@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
-import {AuthContext} from "./context/AuthProvider";
-import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useNavigate } from 'react-router-dom';
+import { AuthContext } from "./context/AuthProvider";
 import "./css/LP-Styling.css";
 import "./css/R-Styling.css";
 
@@ -34,7 +34,7 @@ export default function RatePage() {
     const [currentRate, setCurrentRate] = useState(null);
     const [output, setOutput] = useState('');
     let navigate = useNavigate();
-    const userDetails = JSON.parse(localStorage.getItem('userDetails')); // userDetails.firstName, lastName, email, username
+    const userDetails = JSON.parse(localStorage.getItem('userDetails')); // userDetails.firstname, lastname, email, username
     const { auth } = useContext(AuthContext);
 
     useEffect(() => {
@@ -115,10 +115,12 @@ export default function RatePage() {
                         <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
                     </div>
                     <div style={{marginLeft:"30px",  marginTop:"45px", position:"relative", left:"70%"}}>
-                        <button onClick={handleNotifVisibility} style={{border:'none', padding:'0px', margin:'0px'}}>
-                            <img src="testnotif.png" style={{height: '50px' }}/>
+                        <button onClick={handleNotifVisibility} style={{border:'none', padding:'0px', margin:'0px', background:'none'}}>
+                            <img src="testnotif.png" style={{height: '50px'}}/>
                         </button>
-                        <button onClick={navigateToProfileSettings}>Profile</button>
+                        <button onClick={navigateToProfileSettings} style={{border:'none', padding:'0px', margin:'0px', background:"none"}}>
+                            <img src={userDetails.picture} style={{height: '50px', width:'50px', backgroundColor:"#fffffff" }}/>
+                        </button>
                         {vnotif && (
                             <div className="notification-container" style={{position: "absolute", top:"45px", right:"0", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
                                 <h1 className="heading" style={{color:"#ffffff", marginBottom:"10px"}}>Notifications</h1>
