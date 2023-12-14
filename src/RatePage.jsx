@@ -12,6 +12,8 @@ const NotificationItem = ({ message }) => (
   );
 
 export default function RatePage() {
+    const [profileImageUrl, setProfileImageUrl] = useState('');
+    const { auth, setAuth } = useContext(AuthContext);
     const [vnotif, setVNotif] = useState(false);
     const [vprof, setVProf] = useState(false);
     const [rates, setRates] = useState({
@@ -35,7 +37,13 @@ export default function RatePage() {
     const [output, setOutput] = useState('');
     let navigate = useNavigate();
     const userDetails = JSON.parse(localStorage.getItem('userDetails')); // userDetails.firstname, lastname, email, username
-    const { auth } = useContext(AuthContext);
+
+    let userId = userDetails.id
+    useEffect(() => {
+        if (userId) {
+            fetchPicture(userId);
+        }
+    }, [userId]);
 
     useEffect(() => {
         if (!auth) {
@@ -53,6 +61,12 @@ export default function RatePage() {
         }
     }
 
+    const handleLogout = () => {
+        localStorage.clear(); 
+        setAuth(false); 
+        navigate('/login'); 
+      };
+
     const [notifications, setNotifications] = useState([
         { id: 1, message: "Notification 1" },
         { id: 2, message: "Notification 2" },
@@ -60,6 +74,21 @@ export default function RatePage() {
 
     function navigateToProfileSettings() {
         navigate('/profilesettings')
+    }
+
+
+    const fetchPicture = async (userId) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/user/${userId}/picture`, {
+                responseType: 'blob'
+            });
+    
+            const imageUrl = URL.createObjectURL(response.data);
+            setProfileImageUrl(imageUrl); 
+        } catch (error) {
+            console.error('Error fetching the picture:', error);
+            setProfileImageUrl(''); 
+        }       
     }
 
     const fetchCurrentMonthRate = async () => {
@@ -92,7 +121,7 @@ export default function RatePage() {
             setOutput(calculatedOutput.toFixed(2)); 
         }
     };
-    // ???
+
     return (
         <div>
 
@@ -105,7 +134,7 @@ export default function RatePage() {
                     <li><NavLink to="/tips" activeClassName="active">Tips</NavLink></li>
                     <li><NavLink to="/goals" activeClassName="active">Goals</NavLink></li>
                     <hr style={{marginTop:"200px"}}></hr>
-                    <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
+                    <li><NavLink to="/login" onClick={handleLogout} activeClassName="active">Logout</NavLink></li>
                 </ul>
             </div>
             <div style={{marginLeft:"300px"}}>
@@ -114,12 +143,24 @@ export default function RatePage() {
                         <h3 className="heading" style={{textAlign:"left", marginBottom:"10px", marginTop:"40px", marginLeft:"25px"}}>Energy Rate</h3>
                         <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
                     </div>
-                    <div style={{marginLeft:"30px",  marginTop:"45px", position:"relative", left:"70%"}}>
-                        <button onClick={handleNotifVisibility} style={{border:'none', padding:'0px', margin:'0px', background:'none'}}>
-                            <img src="testnotif.png" style={{height: '50px'}}/>
+                    <div style={{marginLeft:"10px",  marginTop:"45px", position:"relative", left:"75%"}}>
+                        <button onClick={handleNotifVisibility} style={{border:'none', marginRight:'10px', marginRight:'10px', background:'none'}}>
+                            <img src="testnotif.png" style={{height: '55px', display: 'block'}}/>
                         </button>
                         <button onClick={navigateToProfileSettings} style={{border:'none', padding:'0px', margin:'0px', background:"none"}}>
-                            <img src={userDetails.picture} style={{height: '50px', width:'50px', backgroundColor:"#fffffff" }}/>
+                            <img
+                            src={profileImageUrl}
+                            style={{
+                                width: '55px',
+                                height: '55px',
+                                borderRadius: '50%', 
+                                border: '5px solid #04364A',
+                                objectFit: 'cover', 
+                                display: 'block',
+                                boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)'
+                            }}
+                            alt="Profile"
+                            />
                         </button>
                         {vnotif && (
                             <div className="notification-container" style={{position: "absolute", top:"45px", right:"0", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>

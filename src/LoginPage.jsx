@@ -1,7 +1,7 @@
-import React, {useState, useRef, useContext} from "react";
-import {AuthContext} from "./context/AuthProvider";
-import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
+import React, { useContext, useRef, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from "./context/AuthProvider";
 import "./css/LP-Styling.css";
 
 export default function LoginPage() {
@@ -54,10 +54,15 @@ export default function LoginPage() {
     const fetchUserDetails = async (username) => {
         try {
             const userDetailsResponse = await axios.get(`http://localhost:8080/user/getUserDetails`, {
-                params: { username }
+                params: { username: username }
             });
-
-            localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
+            console.log('userDetailsResponse.data', userDetailsResponse.data); 
+            if (userDetailsResponse.data) { 
+                localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
+                console.log('Data stored:', localStorage.getItem('userDetails'));
+            } else {
+                console.error('No data received from fetchUserDetails API');
+            }
         } catch(error) {
             console.error('Failed to fetch details:', error);
         }
@@ -66,10 +71,15 @@ export default function LoginPage() {
     const fetchAdminDetails = async (username) => {
         try {
             const adminDetailsResponse = await axios.get(`http://localhost:8080/admin/getAdminDetails`, {
-                params: { username }
+                params: { username: username }
             });
-
-            localStorage.setItem('adminDetails', JSON.stringify(adminDetailsResponse.data));
+            console.log('adminDetailsResponse.data', adminDetailsResponse.data); 
+            if (adminDetailsResponse.data) { 
+                localStorage.setItem('adminDetails', JSON.stringify(adminDetailsResponse.data));
+                console.log('Data stored:', localStorage.getItem('adminDetails'));
+            } else {
+                console.error('No data received from fetchAdminDetails API');
+            }
         } catch(error) {
             console.error('Failed to fetch details:', error);
         }

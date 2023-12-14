@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import "./css/LP-Styling.css";
 import "./css/R-Styling.css";
@@ -16,9 +16,19 @@ export default function ProfileSettingsPage() {
     const [fieldvis1, setFieldVis1] = useState(true);
     const [fieldvis2, setFieldVis2] = useState(true);
     const [fieldvis3, setFieldVis3] = useState(true);
+
+    const [profilePicture, setProfilePicture] = useState(null);
+
+    const [profileImageUrl, setProfileImageUrl] = useState('');
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
 
-    
+    let userId = userDetails.id
+    useEffect(() => {
+        if (userId) {
+            fetchPicture(userId);
+        }
+    }, [userId]);
+
     function handleVisibility1() {
         if(fieldvis1) {
             setFieldVis1(false);
@@ -46,6 +56,50 @@ export default function ProfileSettingsPage() {
     function navigateUpdatePassword() {
         navigate('/updatepassword');
     }
+
+    const fetchPicture = async (userId) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/user/${userId}/picture`, {
+                responseType: 'blob'
+            });
+    
+            const imageUrl = URL.createObjectURL(response.data);
+            setProfileImageUrl(imageUrl); 
+        } catch (error) {
+            console.error('Error fetching the picture:', error);
+            setProfileImageUrl(''); 
+        }       
+    }
+
+    const handleImageUpload = async () => {
+        if (!profilePicture) {
+          alert("Please select a picture to upload.");
+          return;
+        }
+      
+        const formData = new FormData();
+        formData.append("username", userDetails.username);
+        formData.append("picture", profilePicture);
+      
+        try {
+          const response = await axios.post(`http://localhost:8080/user/updatePicture`, formData,
+            {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            }
+          );
+          const updatedUserDetails = { ...userDetails, picture: response.data };
+          localStorage.setItem("userDetails", JSON.stringify(updatedUserDetails));
+          setProfilePicture(null);
+          alert("Picture updated successfully!");
+          navigate('/rate'); 
+        } catch (error) {
+          console.error("Failed to upload picture:", error);
+          alert("Failed to upload picture.");
+        }
+      };
+      
 
     const fetchUserDetails = async () => {
         try {
@@ -126,7 +180,63 @@ export default function ProfileSettingsPage() {
             </div>
 
             <div style={{display:"flex", justifyContent:"center", marginLeft:'120px', gap:"30px", alignItems:"center", height:"28vh"}}>
-                <img src={userDetails.picture} width="300"></img>
+                <div style={{ position: 'relative', display: 'inline-block' }}>
+                    <button
+                        onClick={() => document.getElementById('fileInput').click()}
+                        style={{
+                        position: 'absolute',
+                        top: '5px', 
+                        right: '5px', 
+                        background: '#04364A',
+                        color: 'white',
+                        borderRadius: '50%',
+                        width: '30px',
+                        height: '30px',
+                        textAlign: 'center',
+                        lineHeight: '30px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        }}
+                    >✏️</button>
+                    <img
+                        src={profileImageUrl}
+                        style={{
+                            width: '150px',
+                            height: '150px',
+                            borderRadius: '50%', 
+                            border: '5px solid #04364A',
+                            objectFit: 'cover', 
+                            display: 'block',
+                            boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)'
+                        }} alt="Profile"/>
+                    {profilePicture && (
+                        <button
+                        onClick={handleImageUpload}
+                        style={{
+                            position: 'absolute',
+                            bottom: '10px', 
+                            right: '10px', 
+                            background: '#04364A', 
+                            color: 'white',
+                            borderRadius: '50%',
+                            textAlign: 'center',
+                            lineHeight: '30px',
+                            border: 'none',
+                            cursor: 'pointer',
+                        }}>✔️</button>
+                    )}
+                   
+                </div>
+                <input
+                    id="fileInput"
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setProfilePicture(e.target.files[0])}
+                    style={{ display: 'none' }}
+                />
+                    
+             
+
                 <span style={{marginTop:"35px"}}>
                     <h4 className='heading' style={{textAlign:"left"}}>{userDetails.username}</h4>
                     <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", color:"#04364A"}}>{userDetails.email}</p>
