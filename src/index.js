@@ -1,22 +1,24 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import './css/index.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Aboutus from './Aboutus';
+import AdminDashboard from './AdminDashboard';
+import CalendarPage from './CalendarPage';
+import ContactPage from './ContactPage';
+import DashboardPage from './DashboardPage';
 import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
-import Aboutus from './Aboutus';
-import RatePage from './RatePage';
+import PasswordUpdatePage from './PasswordUpdatePage';
 import PricingPage from './PricingPage';
 import PrivateRoute from './PrivateRoute';
-import reportWebVitals from './reportWebVitals';
-import RegistrationPage from './RegistrationPage';
-import AdminDashboard from './AdminDashboard';
-import PasswordUpdatePage from './PasswordUpdatePage';
-import UserListPage from './UserListPage';
 import ProfileSettingsPage from './ProfileSettingsPage';
-import { AuthProvider } from './context/AuthProvider';
-import ContactPage from './ContactPage';
+import RatePage from './RatePage';
+import RegistrationPage from './RegistrationPage';
 import TestPage from './TestPage';
+import UserListPage from './UserListPage';
+import { AuthProvider } from './context/AuthProvider';
+import './css/index.css';
+import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -33,10 +35,15 @@ root.render(
 
 
 
-
+        <Route path="/dashboard" element={<PrivateRoute>
+          <DashboardPage />
+          </PrivateRoute>} />
         <Route path="/rate" element={<PrivateRoute>
           <RatePage />
           </PrivateRoute>} />
+        <Route path="/calendar" element={<PrivateRoute>
+        <CalendarPage />
+        </PrivateRoute>} />
         <Route path="/test" element={<PrivateRoute>
           <TestPage />
           </PrivateRoute>} />

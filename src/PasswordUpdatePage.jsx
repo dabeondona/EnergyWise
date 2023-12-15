@@ -1,9 +1,8 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {AuthContext} from "./context/AuthProvider";
-import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
-import "./css/LP-Styling.css"
-import "./css/R-Styling.css"
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import "./css/LP-Styling.css";
+import "./css/R-Styling.css";
 
 export default function PasswordUpdatePage() {
     let navigate = useNavigate();
@@ -57,7 +56,7 @@ export default function PasswordUpdatePage() {
           try {
             const response = await axios.post(apiUpdatePasswordSettingsUrl, passwordUpdateContent);
             console.log('Password updated successfully:', response.data);
-            navigate('/rate');
+            navigate('/dashboard');
             alert('Password updated successfully!');
           } catch (error) {
             if (error.response) {

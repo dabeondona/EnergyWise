@@ -45,6 +45,11 @@
     max-width: 600px; 
 }
 
+.flex-center-vertical {
+    display: flex;
+    align-items: center;
+  }
+
 .rate-info-card {
     background-color: #fff;
     border-radius: 10px;

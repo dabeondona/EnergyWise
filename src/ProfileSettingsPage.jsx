@@ -145,7 +145,7 @@ export default function ProfileSettingsPage() {
                 console.log('User updated successfully:', response.data);
 
                 await fetchUserDetails();
-                navigate('/rate'); 
+                navigate('/dashboard'); 
                 alert('User updated successfully!');
             } catch(error) {
                 if (error.response) {

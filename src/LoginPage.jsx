@@ -40,7 +40,7 @@ export default function LoginPage() {
                     console.log(localStorage.getItem('token'))
                     await fetchUserDetails(username);
                     setAuth(true);
-                    navigate('/rate'); 
+                    navigate('/dashboard'); 
 
                 } catch (userError) {
                     handleLoginError(userError);

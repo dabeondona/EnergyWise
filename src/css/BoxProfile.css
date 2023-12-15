@@ -1,0 +1,110 @@
+.box {
+    position:absolute;
+  }
+  
+  .box .group {
+    height: 191px;
+    left: 0;
+    top: 0;
+  }
+  
+  .box .overlap-group {
+    height: 1990px;
+    width: 1990px;
+  }
+  
+  .box .rectangle {
+    height: 178px;
+    left: 26px;
+    position: absolute;
+    top: 14px;
+    width: 306px;
+  }
+  
+  .box .div {
+    background-color: #73d2f8;
+    border-radius: 10px;
+    height: 136px;
+    left: 24px;
+    position: absolute;
+    top: 16px;
+    transform: rotate(-25deg);
+    width: 106px;
+  }
+  
+  .box .rectangle-2 {
+    background-color: #73d2f8;
+    border-radius: 10px;
+    height: 41px;
+    left: 26px;
+    position: absolute;
+    top: 150px;
+    width: 295px;
+  }
+  
+  .box .text-wrapper {
+    color: #ffffff;
+    font-family: "Roboto-SemiBold", Helvetica;
+    font-size: 22px;
+    font-weight: 600;
+    height: 63px;
+    left: 120px;
+    letter-spacing: 0.75px;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 65px;
+    width: 200px;
+  }
+  
+  .box .text-wrapper-2 {
+    color: #ffffff;
+    font-family: "Roboto-Regular", Helvetica;
+    font-size: 11px;
+    font-weight: 400;
+    height: 18px;
+    left: 134px;
+    letter-spacing: 0.75px;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 90px;
+    width: 200px;
+  }
+  
+  .box .text-wrapper-3 {
+    color: #04364a;
+    font-family: "Roboto-Black", Helvetica;
+    font-size: 15px;
+    font-weight: 700;
+    height: 32px;
+    left: 46px;
+    letter-spacing: 0.75px;
+    line-height: normal;
+    position: absolute;
+    cursor: pointer;
+    top: 162px;
+    width: 200px;
+  }
+  
+  .box .user-alt-fill-wrapper {
+    background-color: #d9d9d9;
+    border-radius: 42.5px/41.19px;
+    left: 32px;
+    position: absolute;
+    top: 38px;
+    width: 85px;
+  }
+  
+  .box .user-alt-fill {
+    height: 65px !important;
+    left: 9px !important;
+    position: absolute !important;
+    top: 5px !important;
+    width: 65px !important;
+  }
+  
+  :root {
+    --inner-shadow: ;
+  }
+  
