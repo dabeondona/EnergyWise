@@ -6,8 +6,9 @@ import "./css/R-Styling.css";
 
 
 export default function ProfileSettingsPage() {
-
     let navigate = useNavigate();
+    const [profilePicture, setProfilePicture] = useState(null);
+    const [profileImageUrl, setProfileImageUrl] = useState('');
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -17,17 +18,118 @@ export default function ProfileSettingsPage() {
     const [fieldvis2, setFieldVis2] = useState(true);
     const [fieldvis3, setFieldVis3] = useState(true);
 
-    const [profilePicture, setProfilePicture] = useState(null);
-
-    const [profileImageUrl, setProfileImageUrl] = useState('');
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
-
     let userId = userDetails.id
     useEffect(() => {
-        if (userId) {
+        if(userId) {
             fetchPicture(userId);
         }
     }, [userId]);
+
+    const fetchPicture = async (userId) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/user/${userId}/picture`, {
+                responseType: 'blob'
+            });
+    
+            const imageUrl = URL.createObjectURL(response.data);
+            setProfileImageUrl(imageUrl); 
+        } catch (error) {
+            console.error('Error fetching the picture:', error);
+            setProfileImageUrl(''); 
+        }       
+    }
+
+    const handleImageUpload = async () => {
+        if(!profilePicture) {
+          alert("Please select a picture to upload.");
+          return;
+        }
+      
+        const formData = new FormData();
+        formData.append("username", userDetails.username);
+        formData.append("picture", profilePicture);
+      
+        try {
+          const response = await axios.post(`http://localhost:8080/user/updatePicture`, formData,
+            { headers: {
+                "Content-Type": "multipart/form-data",},
+            });
+          const updatedUserDetails = { ...userDetails, picture: response.data };
+          localStorage.setItem("userDetails", JSON.stringify(updatedUserDetails));
+
+          setProfilePicture(null);
+          alert("Picture updated successfully!");
+          navigate('/rate'); 
+
+        } catch(error) {
+          console.error("Failed to upload picture:", error);
+          alert("Failed to upload picture.");
+        }
+      };
+      
+
+    const fetchUserDetails = async () => {
+        try {
+            const userDetailsResponse = await axios.get(`http://localhost:8080/user/getUserDetails`, {
+                params: { username: userDetails.username } 
+            });
+    
+            localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
+            setFirstName(userDetailsResponse.data.firstName);
+            setLastName(userDetailsResponse.data.lastName);
+            setEmail(userDetailsResponse.data.email);
+
+        } catch(error) {
+            console.error('Failed to fetch user details:', error);
+        }
+    };
+
+    const handleUpdate = async () => {
+        const isConfirmed = window.confirm('Are you sure you want to do this?');
+
+        if(isConfirmed) {
+            const apiUpdateProfileSettingsUrl = 'http://localhost:8080/user/updateUser';
+            const userId = parseInt(userDetails.id, 10)
+        
+            const content = {};  
+            if(firstName !== userDetails.firstName && firstName !== '') {
+                content.firstname = firstName;
+            }
+            if(lastName !== userDetails.lastName && lastName !== '') {
+                content.lastname = lastName;
+            }
+            if(email !== userDetails.email && email !== '') {
+                content.email = email;
+            }
+        
+            if(Object.keys(content).length === 0) {
+                alert('No changes to update.');
+                return;
+            }
+        
+            try {
+                const response = await axios.put(`${apiUpdateProfileSettingsUrl}/${userId}`, content);
+                console.log('User updated successfully:', response.data);
+
+                await fetchUserDetails();
+                navigate('/dashboard'); 
+                alert('User updated successfully!');
+            } catch(error) {
+                if (error.response) {
+                    console.log(error.response.data);
+                    console.log(error.response.status);
+                    console.log(error.response.headers);
+                } else if(error.request) {
+                    console.log(error.request);
+                } else {
+                    console.log('Error', error.message);
+                }
+            }
+        } else {
+            navigate('/rate');
+        }
+    }
 
     function handleVisibility1() {
         if(fieldvis1) {
@@ -56,116 +158,9 @@ export default function ProfileSettingsPage() {
     function navigateUpdatePassword() {
         navigate('/updatepassword');
     }
-
-    const fetchPicture = async (userId) => {
-        try {
-            const response = await axios.get(`http://localhost:8080/user/${userId}/picture`, {
-                responseType: 'blob'
-            });
     
-            const imageUrl = URL.createObjectURL(response.data);
-            setProfileImageUrl(imageUrl); 
-        } catch (error) {
-            console.error('Error fetching the picture:', error);
-            setProfileImageUrl(''); 
-        }       
-    }
-
-    const handleImageUpload = async () => {
-        if (!profilePicture) {
-          alert("Please select a picture to upload.");
-          return;
-        }
-      
-        const formData = new FormData();
-        formData.append("username", userDetails.username);
-        formData.append("picture", profilePicture);
-      
-        try {
-          const response = await axios.post(`http://localhost:8080/user/updatePicture`, formData,
-            {
-              headers: {
-                "Content-Type": "multipart/form-data",
-              },
-            }
-          );
-          const updatedUserDetails = { ...userDetails, picture: response.data };
-          localStorage.setItem("userDetails", JSON.stringify(updatedUserDetails));
-          setProfilePicture(null);
-          alert("Picture updated successfully!");
-          navigate('/rate'); 
-        } catch (error) {
-          console.error("Failed to upload picture:", error);
-          alert("Failed to upload picture.");
-        }
-      };
-      
-
-    const fetchUserDetails = async () => {
-        try {
-            const userDetailsResponse = await axios.get(`http://localhost:8080/user/getUserDetails`, {
-                params: { username: userDetails.username } 
-            });
-    
-            localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
-            setFirstName(userDetailsResponse.data.firstName);
-            setLastName(userDetailsResponse.data.lastName);
-            setEmail(userDetailsResponse.data.email);
-        } catch (error) {
-            console.error('Failed to fetch user details:', error);
-        }
-    };
-
-    async function handleUpdate() {   
-        const isConfirmed = window.confirm('Are you sure you want to do this?');
-
-        if(isConfirmed) {
-            const apiUpdateProfileSettingsUrl = 'http://localhost:8080/user/updateUser';
-            const userId = parseInt(userDetails.id, 10)
-        
-            const content = {};
-        
-            if(firstName !== userDetails.firstName && firstName !== '') {
-                content.firstname = firstName;
-            }
-            if(lastName !== userDetails.lastName && lastName !== '') {
-                content.lastname = lastName;
-            }
-            if(email !== userDetails.email && email !== '') {
-                content.email = email;
-            }
-        
-            if(Object.keys(content).length === 0) {
-                alert('No changes to update.');
-                return;
-            }
-        
-            try {
-                const response = await axios.put(`${apiUpdateProfileSettingsUrl}/${userId}`, content);
-                console.log('User updated successfully:', response.data);
-
-                await fetchUserDetails();
-                navigate('/dashboard'); 
-                alert('User updated successfully!');
-            } catch(error) {
-                if (error.response) {
-                    console.log(error.response.data);
-                    console.log(error.response.status);
-                    console.log(error.response.headers);
-                } else if (error.request) {
-                    console.log(error.request);
-                } else {
-                    console.log('Error', error.message);
-                }
-            }
-        } else {
-            navigate('/rate');
-        }
-    }
-    
-
     return (
-        <div>
+        <>
              <div className="navigation">
                 <img src="energywise_logo.png" alt="Logo" width="170px" style={{marginLeft:"25px", marginBottom:"50px"}}/>
                 <ul className="nav-list">
@@ -308,6 +303,6 @@ export default function ProfileSettingsPage() {
                 </div>
             </div>
 
-        </div>
+        </>
     );
 }

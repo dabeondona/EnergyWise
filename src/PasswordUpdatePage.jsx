@@ -9,10 +9,6 @@ export default function PasswordUpdatePage() {
 
     const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-    const togglePasswordVisibility = () => {
-        setPasswordShown(passwordShown => !passwordShown);
-    };
-
     const [passwordShown, setPasswordShown] = useState(false);
     const [password, setPassword] = useState('');
     const [passwordFocus, setPasswordFocus] = useState(false);
@@ -32,39 +28,32 @@ export default function PasswordUpdatePage() {
         setValidConfirmPassword(match);
     }, [password, confirmPassword])
     
-    function navigateToSettings() {
-        navigate('/profilesettings')
-    }
-
-    async function handleUpdatePassword() {
-        if (!validpassword || !validconfirmpassword) {
+    const handleUpdatePassword = async () => {
+        if(!validpassword || !validconfirmpassword) {
           alert('Password is invalid or does not match.');
           return;
         }
-      
         const isConfirmed = window.confirm('Are you sure you want to update your password?');
       
-        if (isConfirmed) {
+        if(isConfirmed) {
           const apiUpdatePasswordSettingsUrl = 'http://localhost:8080/user/updatePassword';
           const userId = parseInt(userDetails.id, 10);
       
-          const passwordUpdateContent = {
-            userId: userId,
-            newPassword: password,
-          };
+          const passwordUpdateContent = {userId: userId, newPassword: password};
       
           try {
             const response = await axios.post(apiUpdatePasswordSettingsUrl, passwordUpdateContent);
             console.log('Password updated successfully:', response.data);
+
             navigate('/dashboard');
             alert('Password updated successfully!');
-          } catch (error) {
-            if (error.response) {
+          } catch(error) {
+            if(error.response) {
               console.log(error.response.data);
               console.log(error.response.status);
               console.log(error.response.headers);
               alert(error.response.data || "Failed to update password.");
-            } else if (error.request) {
+            } else if(error.request) {
               console.log(error.request);
               alert("Failed to update password.");
             } else {
@@ -73,17 +62,23 @@ export default function PasswordUpdatePage() {
             }
           }
         }
-      }
-      
+    }
 
+    function navigateToSettings() {
+      navigate('/profilesettings')
+    }
+
+    const togglePasswordVisibility = () => {
+      setPasswordShown(passwordShown => !passwordShown);
+    };
+      
     return (
-        <div>
+        <>
              <button onClick={navigateToSettings} style={{border:'none', padding:'0px', margin:'0px'}}>
                 <img src="back.png" style={{height: '50px' }}/>
              </button>
 
-            <div style={{display:"flex", justifyContent:"center", gap:"250px", alignItems:"center", height:"28vh"}}>
-            </div>
+            <div style={{display:"flex", justifyContent:"center", gap:"250px", alignItems:"center", height:"28vh"}}></div>
 
             <div style={{marginLeft:"400px"}}>
                 <h3 className="heading" style={{textAlign:"left", marginLeft:"25px"}}>Password Settings</h3>
@@ -131,6 +126,6 @@ export default function PasswordUpdatePage() {
                 </div>
             </div>
 
-        </div>
+        </>
     );
 }
