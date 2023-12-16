@@ -34,13 +34,7 @@ export default function RatePage() {
         price_luzon: null,
         price_mindanao: null,
     });
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const lastMonth = new Date(currentDate.setMonth(currentMonth - 1));
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-    const lastMonthName = monthNames[lastMonth.getMonth()];
+
     const [inputtedValue, setInputtedValue] = useState('');
     const [output, setOutput] = useState('');
 
@@ -182,7 +176,7 @@ export default function RatePage() {
                                     <h3 className="heading" style={{textAlign:"left"}}>Energy Rate</h3>
                                         <div className="region-rates">
                                             <div className="rate-region luzon">
-                                                <h3 className="heading">{rates.previous_month}</h3> {/* to be changed */}
+                                                <h3 className="heading">{rates.previous_month}</h3>
                                                 <div style={{display:"flex", alignItems:"baseline", }}>
                                                     <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>₱</p>
                                                     <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.previous_price}</p>
