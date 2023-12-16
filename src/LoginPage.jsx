@@ -29,7 +29,7 @@ export default function LoginPage() {
             setAuth(true);
             navigate('/admin-dashboard');
 
-        } catch (adminError) {
+        } catch(adminError) {
             if ((adminError.response && adminError.response.status === 401) || (adminError.response && adminError.response.status === 404)) {
                 try {
                     const userLoginResponse = await axios.post('http://localhost:8080/user/login', {
@@ -40,9 +40,9 @@ export default function LoginPage() {
                     console.log(localStorage.getItem('token'))
                     await fetchUserDetails(username);
                     setAuth(true);
-                    navigate('/rate'); 
+                    navigate('/dashboard'); 
 
-                } catch (userError) {
+                } catch(userError) {
                     handleLoginError(userError);
                 }
             } else {
@@ -54,10 +54,15 @@ export default function LoginPage() {
     const fetchUserDetails = async (username) => {
         try {
             const userDetailsResponse = await axios.get(`http://localhost:8080/user/getUserDetails`, {
-                params: { username }
+                params: { username: username }
             });
-
-            localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
+            console.log('userDetailsResponse.data', userDetailsResponse.data); 
+            if(userDetailsResponse.data) { 
+                localStorage.setItem('userDetails', JSON.stringify(userDetailsResponse.data));
+                console.log('Data stored:', localStorage.getItem('userDetails'));
+            } else {
+                console.error('No data received from fetchUserDetails API');
+            }
         } catch(error) {
             console.error('Failed to fetch details:', error);
         }
@@ -66,19 +71,24 @@ export default function LoginPage() {
     const fetchAdminDetails = async (username) => {
         try {
             const adminDetailsResponse = await axios.get(`http://localhost:8080/admin/getAdminDetails`, {
-                params: { username }
+                params: { username: username }
             });
-
-            localStorage.setItem('adminDetails', JSON.stringify(adminDetailsResponse.data));
+            console.log('adminDetailsResponse.data', adminDetailsResponse.data); 
+            if(adminDetailsResponse.data) { 
+                localStorage.setItem('adminDetails', JSON.stringify(adminDetailsResponse.data));
+                console.log('Data stored:', localStorage.getItem('adminDetails'));
+            } else {
+                console.error('No data received from fetchAdminDetails API');
+            }
         } catch(error) {
             console.error('Failed to fetch details:', error);
         }
     };
 
     const handleLoginError = (error) => {
-        if (!error.response) {
+        if(!error.response) {
             setErrMsg('No server response.');
-        } else if (error.response.status === 401) {
+        } else if(error.response.status === 401) {
             setErrMsg('Unauthorized. Please check your username and password.');
             console.log(error)
             alert('Incorrect username or password.');
@@ -107,20 +117,19 @@ export default function LoginPage() {
         return (
             <div className="bottom-signin">
                 <div className="regular">Don't have an account?</div>
-                <button className="regular-button" onClick={handleRegisterNow}>
-                Register now
-            </button>
+                <button className="regular-button" onClick={handleRegisterNow}>Register now</button>
             </div>
         );
     }
    
     return (
             <div className="main">
-
-            <div className="image-container">
-                <img src="login-3D.png" alt="login-vector-3D" className="login-3D" />
-            </div>
+                <div className="image-container">
+                    <img src="login-3D.png" alt="login-vector-3D" className="login-3D" />
+                </div>
+                    
                 <NavigationBar/>
+
                 <div className="signin">
                     <img className="logo-energywise" alt="company_logo" src="energywise_logo.png" width="250" />
                     <p className="heading">Log in to your account</p>
