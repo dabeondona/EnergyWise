@@ -30,13 +30,13 @@ export default function DashboardPage() {
     const userDetails = JSON.parse(localStorage.getItem('userDetails'));
     let userId = userDetails.id
     useEffect(() => {
-        if (userId) {
+        if(userId) {
             fetchPicture(userId);
         }
     }, [userId]);
 
     useEffect(() => {
-        if (!auth) {
+        if(!auth) {
             navigate('/login');
         } 
     }, [auth, navigate]);
@@ -49,7 +49,7 @@ export default function DashboardPage() {
     
             const imageUrl = URL.createObjectURL(response.data);
             setProfileImageUrl(imageUrl); 
-        } catch (error) {
+        } catch(error) {
             console.error('Error fetching the picture:', error);
             setProfileImageUrl(''); 
         }       
@@ -71,14 +71,14 @@ export default function DashboardPage() {
         }
     }
 
-    const handleLogout = () => {
+    function handleLogout() {
         localStorage.clear(); 
         setAuth(false); 
         navigate('/login'); 
       };
 
     return (
-        <div>
+        <>
             <div className="navigation">
                 <img src="energywise_logo.png" alt="Logo" width="170px" style={{marginLeft:"25px", marginBottom:"50px"}}/>
                 <ul className="nav-list">
@@ -92,37 +92,37 @@ export default function DashboardPage() {
                 </ul>
             </div>
             <div style={{marginLeft:"300px"}}>
-                <div style={{display:"flex", flex:"1"}}>
-                    <div>
+                <div style={{display:"flex"}}>
+                    <div style={{display:"block"}}>
                         <h3 className="heading" style={{textAlign:"left", marginBottom:"10px", marginTop:"40px", marginLeft:"25px"}}>Dashboard</h3>
-                        <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
+                        <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome to your Energy Management Dashboard</p>
                     </div>
-                    <div style={{marginLeft:"10px",  marginTop:"45px", position:"relative", left:"75%"}}>
+                    <div style={{display:"inline-block", marginTop:"35px", position:"fixed", right:"70px"}}>
                         <IconButton onClick={handleNotifVisibility} style={{border:'none', marginRight:'10px', marginBottom:'30px', background:'none'}}>
                             <NotificationsIcon sx={{ color: '#04364A' }} style={{height: '55px', display: 'block'}} fontSize="large"/>
                         </IconButton>
                         <button onClick={handleProfVisibility} style={{border:'none', padding:'0px', margin:'0px', background:"none"}}>
                             <img src={profileImageUrl} style={{width: '55px', height: '55px', borderRadius: '50%', border: '5px solid #04364A', objectFit: 'cover', display: 'block', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)'}}/>
                         </button>
-                        {vnotif && (
-                            <div style={{position: "absolute", top:"45px", right:"0", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
+                    </div>
+                    {vnotif && (
+                            <div style={{position: "absolute", top:"100px", right:"135px", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
                                 <h1 className="heading" style={{color:"#ffffff", marginBottom:"10px"}}>Notifications</h1>
                                 {notifications.map((notif) => (
                                     <NotificationItem key={notif.id} message={notif.message} />
                                 ))}
                             </div>
                         )}
-                        {vprof && (
-                            <div>
-                                <BoxProfile style={{position: "absolute", zIndex: 100}}/>
+                    {vprof && (
+                            <div style={{position: "fixed", top:"100px", right:"400px", zIndex: 100}}>
+                                <BoxProfile/>
                             </div>
                         )}
-                    </div>
                 </div>
-                <div style={{height:"100px"}}>
-                    <hr style={{width:"96%"}}></hr>
+                <div>
+                    <hr style={{width:"98%"}}></hr>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
