@@ -1,21 +1,21 @@
-import React from "react";
 import AOS from 'aos';
-import 'aos/dist/aos.css'; 
-import "./css/App.css";
-import { Navbar, Nav } from "react-bootstrap";
-import { useNavigate, Link } from "react-router-dom";
-import "./css/LandingPage.css";
+import 'aos/dist/aos.css';
+import React from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 import "./css/Aboutus.css";
+import "./css/App.css";
+import "./css/LandingPage.css";
 
 const AboutUs = () => {
   
   let navigate = useNavigate();
 
   const handleLoginClick = () => {
-    navigate('/login'); 
+    navigate('/login');
   };
 
-  AOS.init();  
+  AOS.init();
   return (
     <div className="about-us">
       <div className="div">
@@ -23,7 +23,7 @@ const AboutUs = () => {
         {/* NavigationBar */}
         <Navbar sticky="top" className="navbar-main">
                 {/* Navbar content */}
-                <Link to="/" > 
+                <Link to="/" >
                   <img src="energywise_logo.png" alt="Logo" width="150px" className="logo"/>
                 </Link>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -44,7 +44,7 @@ const AboutUs = () => {
                     <p className="p">Every journey comes with a story.</p>
               </div>
           
-               <div data-aos="fade-in" className="container-2">
+          <div data-aos="fade-in" className="container-2">
                 <div>
                 <img
                     className="image-container-1"
