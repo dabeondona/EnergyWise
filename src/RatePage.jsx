@@ -29,16 +29,12 @@ export default function RatePage() {
     const [rates, setRates] = useState({
         month: '',
         price: null,
+        previous_month: '',
+        previous_price: null,
         price_luzon: null,
         price_mindanao: null,
     });
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const lastMonth = new Date(currentDate.setMonth(currentMonth - 1));
-    const monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-    const lastMonthName = monthNames[lastMonth.getMonth()];
+
     const [inputtedValue, setInputtedValue] = useState('');
     const [output, setOutput] = useState('');
 
@@ -77,16 +73,20 @@ export default function RatePage() {
     const fetchCurrentMonthRate = async () => {
         try {
             const response = await axios.get('http://localhost:8080/rate/getAllRates');
-            const currentMonthIndex = new Date().getMonth(); 
             const currentMonthName = new Date().toLocaleString('default', { month: 'long' });
-            const rateForCurrentMonth = response.data.find(rate => {
-                const rateMonth = new Date(rate.date).getMonth();
-                return rateMonth === currentMonthIndex;
-            });
-
+            const rateForCurrentMonth = response.data.find(rate => rate.month === currentMonthName && !rate.isDeleted);
+    
             if(rateForCurrentMonth) {
-                setRates({month: currentMonthName, price: rateForCurrentMonth.price, price_luzon: rateForCurrentMonth.price_luzon, price_mindanao: rateForCurrentMonth.price_mindanao,
+                setRates({
+                    month: rateForCurrentMonth.month,
+                    price: rateForCurrentMonth.price,
+                    previous_month: rateForCurrentMonth.previous_month,
+                    previous_price: rateForCurrentMonth.previous_price,
+                    price_luzon: rateForCurrentMonth.price_luzon,
+                    price_mindanao: rateForCurrentMonth.price_mindanao,
                 });
+            } else {
+                console.log('No rate found for the current month');
             }
         } catch(error) {
             console.error('Failed to fetch rates', error);
@@ -176,11 +176,11 @@ export default function RatePage() {
                                     <h3 className="heading" style={{textAlign:"left"}}>Energy Rate</h3>
                                         <div className="region-rates">
                                             <div className="rate-region luzon">
-                                                <h3 className="heading">{lastMonthName}</h3> {/* to be changed */}
+                                                <h3 className="heading">{rates.previous_month}</h3>
                                                 <div style={{display:"flex", alignItems:"baseline", }}>
                                                     <p className="price" style={{marginTop:"24px", fontSize:"15px"}}>₱</p>
-                                                    <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.price - 2}</p>
-                                                </div>{/* to be changed */}
+                                                    <p className="price" style={{marginTop:"24px", marginLeft: "12px"}}>{rates.previous_price}</p>
+                                                </div>
                                                 <p className="unit">1 kWh</p>
                                             </div>
                                             <div className="rate-region mindanao">

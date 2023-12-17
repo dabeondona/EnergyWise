@@ -2,9 +2,12 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { IconButton } from '@mui/material';
 import 'aos/dist/aos.css';
 import axios from 'axios';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import React, { useContext, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import BoxProfile from './BoxProfile';
+import EnergyConsumptionChart from './EnergyConsumptionChart';
 import { AuthContext } from "./context/AuthProvider";
 import "./css/BoxProfile.css";
 import "./css/LP-Styling.css";
@@ -21,14 +24,16 @@ export default function DashboardPage() {
     const [profileImageUrl, setProfileImageUrl] = useState('');
     const [vnotif, setVNotif] = useState(false);
     const [vprof, setVProf] = useState(false);
+    const [file, setFile] = useState(null);
+    const [energyData, setEnergyData] = useState([]);
     const [notifications, setNotifications] = useState([
         { id: 1, message: "Notification 1" },
         { id: 2, message: "Notification 2" },
     ]);
     const { auth, setAuth } = useContext(AuthContext);
 
-    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
-    let userId = userDetails.id
+    const userDetails = JSON.parse(localStorage.getItem('userDetails')); // userDetails. id, username, firstName, lastName, email
+    let userId = userDetails?.id; 
     useEffect(() => {
         if(userId) {
             fetchPicture(userId);
@@ -55,6 +60,31 @@ export default function DashboardPage() {
         }       
     }
 
+    const handleFileUpload = async (e) => {
+        e.preventDefault(); 
+        if(!file) {
+            alert('Please select a CSV file to upload.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('userId', userId);
+
+        try {
+            const response = await axios.post('http://localhost:8080/energyTable/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log('File uploaded successfully:', response.data);
+            alert('File uploaded successfully!');
+        } catch(error) {
+            console.error('Error uploading file:', error);
+            alert('Error uploading file: ' + error.message);
+        }
+    };
+
     function handleNotifVisibility() {
         if(!vnotif) {
             setVNotif(true);
@@ -75,10 +105,31 @@ export default function DashboardPage() {
         localStorage.clear(); 
         setAuth(false); 
         navigate('/login'); 
+    }
+
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
+    }
+
+    const exportPDF = () => {
+        html2canvas(document.getElementById('root'), {
+            width: 1920,
+            height: 1080,
+            scale: window.devicePixelRatio,
+          }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF({
+              orientation: 'landscape',
+              unit: 'px',
+              format: [1920, 1080]
+            });
+            pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
+            pdf.save('dashboard-page.pdf');
+          });
       };
 
     return (
-        <>
+        <div id="root">
             <div className="navigation">
                 <img src="energywise_logo.png" alt="Logo" width="170px" style={{marginLeft:"25px", marginBottom:"50px"}}/>
                 <ul className="nav-list">
@@ -122,7 +173,24 @@ export default function DashboardPage() {
                 <div>
                     <hr style={{width:"98%"}}></hr>
                 </div>
+
+                <button onClick={exportPDF}>Export as PDF</button>
+
+                <div style={{ marginLeft: '25px', marginTop: '20px' }}>
+                {/* <form onSubmit={handleFileUpload}>
+                    <input 
+                        type="file" 
+                        accept=".csv"
+                        onChange={handleFileChange}
+                    />
+                    <button type="submit">Upload CSV</button>
+                </form> */}
+
+                <div>
+                    <EnergyConsumptionChart userId={userId} />
+                </div>
             </div>
-        </>
+            </div>
+        </div>
     );
 }

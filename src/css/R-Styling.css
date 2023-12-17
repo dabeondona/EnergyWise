@@ -39,7 +39,12 @@
     align-items: center; 
     height: 100%;
   }
-  
+
+  .rate-info-container {
+     width: 100%;
+     max-width: 600px; 
+    }
+    
 
 .flex-center-vertical {
     display: flex;
