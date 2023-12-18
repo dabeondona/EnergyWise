@@ -96,7 +96,7 @@ export default function PasswordUpdatePage() {
                         onChange={(e) => setPassword(e.target.value)}
                         style={{backgroundColor:"#F6F6F6", color:"#A6A6A6", marginLeft:"30px", marginRight:"40px", width:"230%"}}/>
                     <button className="button" onClick={togglePasswordVisibility}>
-                        {passwordShown ? "Hide" : "Show"}
+                        {passwordShown ? "HIDE" : "SHOW"}
                     </button>
                 </div>
 
