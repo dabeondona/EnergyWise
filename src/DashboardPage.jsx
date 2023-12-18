@@ -123,11 +123,11 @@ export default function DashboardPage() {
         navigate('/login'); 
     }
 
-    const handleFileChange = (e) => {
+    function handleFileChange(e) {
         setFile(e.target.files[0]);
     }
 
-    const exportPDF = () => {
+    function exportPDF() {
         html2canvas(document.getElementById('root'), {
             width: 1920,
             height: 1080,
@@ -143,8 +143,6 @@ export default function DashboardPage() {
             pdf.save('dashboard-page.pdf');
           });
       };
-
-    console.log(userExists);
 
     return (
         <div id="root">
@@ -164,7 +162,7 @@ export default function DashboardPage() {
                 <div style={{display:"flex"}}>
                     <div style={{display:"block"}}>
                         <h3 className="heading" style={{textAlign:"left", marginBottom:"10px", marginTop:"40px", marginLeft:"25px"}}>Dashboard</h3>
-                        <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome to your Energy Management Dashboard</p>
+                        <p style={{fontFamily:"Roboto-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome to your Energy Management Dashboard</p>
                     </div>
                     <div style={{display:"inline-block", marginTop:"35px", position:"fixed", right:"70px"}}>
                         <IconButton onClick={handleNotifVisibility} style={{border:'none', marginRight:'10px', marginBottom:'30px', background:'none'}}>
@@ -193,18 +191,23 @@ export default function DashboardPage() {
                 </div>
                 {userExists ? (
                     <div style={{ marginLeft: '25px', marginTop: '20px' }}>
-                        <button className="button" onClick={exportPDF}>Export as PDF</button>:<></>
+                        <div>
+                            <button className="button" style={{width:"15%", position:"relative", left:"1200px", backgroundColor:"#F3DC8B"}}onClick={exportPDF}>Export as PDF</button>
+                        </div>
+                        <br/>
                         <EnergyConsumptionChart userId={userId} userExists={userExists} />
                     </div>
                 ) : (
                     <div style={{ marginLeft: '25px', marginTop: '20px' }}>
+                        <img src="data_not_found.png"></img>
+                        <p style={{color:"#04364A", fontFamily:"Roboto-Bold, Helvetica", fontSize:"20px", fontWeight:"600", textAlign:"center"}}>Data not Found, <br/>Add One!</p>
                         <form onSubmit={handleFileUpload}>
                             <input 
                                 type="file" 
                                 accept=".csv"
                                 onChange={handleFileChange}
                             />
-                            <button type="submit">Upload CSV</button>
+                            <button style={{width:"15%"}} className="button" type="submit">UPLOAD</button>
                         </form>
                     </div>
                 )}

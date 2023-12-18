@@ -142,7 +142,7 @@ export default function RatePage() {
                 <div style={{display:"flex"}}>
                     <div style={{display:"block"}}>
                         <h3 className="heading" style={{textAlign:"left", marginBottom:"10px", marginTop:"40px", marginLeft:"25px"}}>Energy Rate</h3>
-                        <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
+                        <p style={{fontFamily:"Roboto-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
                     </div>
                     <div style={{display:"inline-block", marginTop:"35px", position:"fixed", right:"70px"}}>
                         <IconButton onClick={handleNotifVisibility} style={{border:'none', marginRight:'10px', marginBottom:'30px', background:'none'}}>
