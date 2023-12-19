@@ -68,7 +68,8 @@ export default function EnergyConsumptionChart ({ userId, userExists }) {
                         <Bar dataKey="Price" fill="#73D2F8"/>
                     </BarChart>
                 </div>
-                <div style={{ width: '30%', padding: '0px', marginTop:"10px", marginRight:"50px"}}>
+
+                <div style={{ width: '30%', padding: '0px', marginTop:"18px", marginRight:"50px"}}>
 
                     <div style={{display:"flex", gap:"15px"}}>
                         <div style={{width:"50%", borderRadius:"8px 8px 8px 8px", paddingBottom:"10px", margin:"0px", boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>
@@ -83,16 +84,22 @@ export default function EnergyConsumptionChart ({ userId, userExists }) {
                     </div>
 
                     <div style={{marginTop:"20px"}}>
-                        <div style={{width:"100%", borderRadius:"8px 8px 8px 8px", paddingBottom:"10px", margin:"0px", boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>
-                            <h5 style={{paddingLeft:"30px", paddingTop:"30px", color:"#F3DC8B", fontSize:"18px"}}>Avg Usage</h5>
-                            <p style={{paddingLeft:"30px", color:"#FFBD59", fontFamily:"Roboto-Black, Helvetica", fontSize:"20px", fontWeight:"600"}}>{avgUsage ? `${avgUsage} kWh` : 'N/A'}</p>
+                        <div style={{display:"flex", alignItems:"center", width:"100%", borderRadius:"8px 8px 8px 8px", paddingBottom:"10px", margin:"0px", boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>
+                            <img src="kwh.png" style={{marginLeft:"50px", marginTop:"5px"}}></img>
+                            <div>
+                                <h5 style={{paddingLeft:"30px", paddingTop:"30px", color:"#F3DC8B", fontSize:"18px"}}>Avg Usage</h5>
+                                <p style={{paddingLeft:"30px", color:"#FFBD59", fontFamily:"Roboto-Black, Helvetica", fontSize:"20px", fontWeight:"600"}}>{avgUsage ? `${avgUsage} kWh` : 'N/A'}</p>
+                            </div>
                         </div>
                     </div>
 
                     <div style={{marginTop:"20px"}}>
-                        <div style={{width:"100%", borderRadius:"8px 8px 8px 8px", paddingBottom:"10px", margin:"0px", boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>
-                            <h5 style={{paddingLeft:"30px", paddingTop:"30px", color:"#34ACDC", fontSize:"18px"}}>Avg Price</h5>
-                            <p style={{paddingLeft:"30px", color:"#35C5FF", fontFamily:"Roboto-Black, Helvetica", fontSize:"20px", fontWeight:"600"}}>{avgUsage ? `${avgUsage} kWh` : 'N/A'}</p>
+                        <div style={{display:"flex", alignItems:"center", width:"100%", borderRadius:"8px 8px 8px 8px", paddingBottom:"10px", margin:"0px", boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>
+                            <img src="peso.png" style={{marginLeft:"50px", marginTop:"5px"}}></img>
+                            <div>
+                                <h5 style={{paddingLeft:"30px", paddingTop:"25px", color:"#34ACDC", fontSize:"18px"}}>Avg Price</h5>
+                                <p style={{paddingLeft:"30px", color:"#35C5FF", fontFamily:"Roboto-Black, Helvetica", fontSize:"20px", fontWeight:"600"}}>{avgPrice ? `₱ ${avgPrice}` : 'N/A'}</p>
+                            </div>
                         </div>
                     </div>
                 </div>    
