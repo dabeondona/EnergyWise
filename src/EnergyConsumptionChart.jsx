@@ -73,12 +73,12 @@ export default function EnergyConsumptionChart ({ userId, userExists }) {
 
                     <div style={{display:"flex", gap:"15px"}}>
                         <div style={{width:"50%", borderRadius:"8px 8px 8px 8px", paddingBottom:"10px", margin:"0px", boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>
-                            <h5 style={{color:"#FFBD59", fontFamily:"Roboto-Bold, Helvetica", fontWeight:"600", backgroundColor:"#EFEFEF", textAlign:"center", borderRadius:"8px 8px", padding:"15px"}}>Last Month Usage</h5>
+                            <h5 style={{color:"#FFBD59", fontFamily:"Roboto-Bold, Helvetica", fontWeight:"600", backgroundColor:"rgba(65, 65, 65, 0.06)", textAlign:"center", borderRadius:"8px 8px", padding:"15px"}}>Last Month Usage</h5>
                             <p style={{color:"#F3DC8B", fontFamily:"Roboto-Black, Helvetica", fontSize:"20px", fontWeight:"600", textAlign:"center", marginTop:"15px"}}>{lastMonthUsage ? `${lastMonthUsage} kWh` : 'N/A'}</p>
                         </div>
 
                         <div style={{width:"50%", borderRadius:"8px 8px 8px 8px", paddingBottom:"10px", margin:"0px", boxShadow:"0 4px 8px rgba(0, 0, 0, 0.1)"}}>
-                            <h5 style={{color:"#35C5FF", fontFamily:"Roboto-Bold, Helvetica", fontWeight:"600", backgroundColor:"#EFEFEF", textAlign:"center", borderRadius:"8px 8px", padding:"15px"}}>Last Month Price</h5>
+                            <h5 style={{color:"#35C5FF", fontFamily:"Roboto-Bold, Helvetica", fontWeight:"600", backgroundColor:"rgba(65, 65, 65, 0.06)", textAlign:"center", borderRadius:"8px 8px", padding:"15px"}}>Last Month Price</h5>
                             <p style={{color:"#34ACDC", fontFamily:"Roboto-Black, Helvetica", fontSize:"20px", fontWeight:"600", textAlign:"center", marginTop:"15px"}}>{lastMonthPrice ? `₱ ${lastMonthPrice}` : 'N/A'}</p>
                         </div>
                     </div>
