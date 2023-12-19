@@ -1,5 +1,5 @@
 .calendar {
-  width: 600px;
+  width: 1000px;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@
 
 
 .header {
+  width: 1000px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,19 +32,19 @@
 .day-label {
   text-align: center;
   padding: 60px;
-  color: #333; /* Color for day labels */
+  color: #333;
 }
 
 .day-label-r {
   text-align: center;
   padding: 50px;
-  color: #ff0404; /* Color for day labels */
+  color: #ff0404; 
 }
 
 .day {
   text-align: center;
   padding: 20px;
-  border: 1px solid #ccc; /* Add a border to each day */
+  border: 1px solid #ccc; 
 }
 
 .day.outside-month {
