@@ -85,7 +85,7 @@ export default function DashboardPage() {
 
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('userId', userId);
+        formData.append('user_id', userId);
 
         try {
             const response = await axios.post('http://localhost:8080/energyTable/upload', formData, {
@@ -95,6 +95,7 @@ export default function DashboardPage() {
             });
             console.log('File uploaded successfully:', response.data);
             alert('File uploaded successfully!');
+            window.location.reload();
         } catch(error) {
             console.error('Error uploading file:', error);
             alert('Error uploading file: ' + error.message);
@@ -198,16 +199,18 @@ export default function DashboardPage() {
                         <EnergyConsumptionChart userId={userId} userExists={userExists} />
                     </div>
                 ) : (
-                    <div style={{ marginLeft: '25px', marginTop: '20px' }}>
-                        <img src="data_not_found.png"></img>
+                    <div style={{marginTop: '100px' }}>
+                        <img src="data_not_found.png" style={{marginLeft:"660px"}}></img>
                         <p style={{color:"#04364A", fontFamily:"Roboto-Bold, Helvetica", fontSize:"20px", fontWeight:"600", textAlign:"center"}}>Data not Found, <br/>Add One!</p>
-                        <form onSubmit={handleFileUpload}>
+                        <form style={{marginLeft:"560px"}} onSubmit={handleFileUpload}>
+                            
                             <input 
+                                id="file-upload" 
                                 type="file" 
                                 accept=".csv"
                                 onChange={handleFileChange}
                             />
-                            <button style={{width:"15%"}} className="button" type="submit">UPLOAD</button>
+                            <button style={{width:"15%", backgroundColor:"#F3DC8B"}} className="button" type="submit">UPLOAD</button>
                         </form>
                     </div>
                 )}
