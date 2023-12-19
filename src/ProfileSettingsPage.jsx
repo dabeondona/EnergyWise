@@ -26,6 +26,14 @@ export default function ProfileSettingsPage() {
         }
     }, [userId]);
 
+    useEffect(() => {
+        return () => {
+            if(profileImageUrl) {
+                URL.revokeObjectURL(profileImageUrl);
+            }
+        };
+    }, [profileImageUrl]);
+
     const fetchPicture = async (userId) => {
         try {
             const response = await axios.get(`http://localhost:8080/user/${userId}/picture`, {
@@ -226,7 +234,13 @@ export default function ProfileSettingsPage() {
                     id="fileInput"
                     type="file"
                     accept="image/*"
-                    onChange={(e) => setProfilePicture(e.target.files[0])}
+                    onChange={(e) => {
+                        if (e.target.files[0]) {
+                            setProfilePicture(e.target.files[0]);
+                            const imageUrl = URL.createObjectURL(e.target.files[0]);
+                            setProfileImageUrl(imageUrl); 
+                        }
+                    }}
                     style={{ display: 'none' }}
                 />
                     

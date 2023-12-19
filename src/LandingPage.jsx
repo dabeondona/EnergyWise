@@ -1,8 +1,8 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
-import { Carousel, Navbar, Nav } from "react-bootstrap";
-import {useNavigate ,Link } from "react-router-dom";
-import "./css/LandingPage.css"; 
-import "bootstrap/dist/css/bootstrap.min.css"; 
+import { Carousel, Nav, Navbar } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import "./css/LandingPage.css";
 
 const LandingPage = () => {
 

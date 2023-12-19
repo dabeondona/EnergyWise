@@ -22,10 +22,10 @@ const NotificationItem = ({ message }) => (
 export default function DashboardPage() {
     let navigate = useNavigate();
     const [profileImageUrl, setProfileImageUrl] = useState('');
-    const [vnotif, setVNotif] = useState(false);
-    const [vprof, setVProf] = useState(false);
+    const [userExists, setUserExists] = useState(false);
+    const [vNotif, setVNotif] = useState(false);
+    const [vProf, setVProf] = useState(false);
     const [file, setFile] = useState(null);
-    const [energyData, setEnergyData] = useState([]);
     const [notifications, setNotifications] = useState([
         { id: 1, message: "Notification 1" },
         { id: 2, message: "Notification 2" },
@@ -45,6 +45,22 @@ export default function DashboardPage() {
             navigate('/login');
         } 
     }, [auth, navigate]);
+
+    useEffect(() => {
+        if(userId) {
+            userExistsChecker(userId);
+        }
+    }, [userId]);
+
+    const userExistsChecker = async (userId) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/energyTable/user/check/${userId}`);
+            setUserExists(response.data); 
+            console.log("User exists:", response.data);
+        } catch(error) {
+            console.error('Error checking user:', error);
+        }
+    };
 
     const fetchPicture = async (userId) => {
         try {
@@ -69,7 +85,7 @@ export default function DashboardPage() {
 
         const formData = new FormData();
         formData.append('file', file);
-        formData.append('userId', userId);
+        formData.append('user_id', userId);
 
         try {
             const response = await axios.post('http://localhost:8080/energyTable/upload', formData, {
@@ -79,6 +95,7 @@ export default function DashboardPage() {
             });
             console.log('File uploaded successfully:', response.data);
             alert('File uploaded successfully!');
+            window.location.reload();
         } catch(error) {
             console.error('Error uploading file:', error);
             alert('Error uploading file: ' + error.message);
@@ -86,7 +103,7 @@ export default function DashboardPage() {
     };
 
     function handleNotifVisibility() {
-        if(!vnotif) {
+        if(!vNotif) {
             setVNotif(true);
         } else {
             setVNotif(false);
@@ -94,7 +111,7 @@ export default function DashboardPage() {
     }
 
     function handleProfVisibility() {
-        if(!vprof) {
+        if(!vProf) {
             setVProf(true);
         } else {
             setVProf(false);
@@ -107,11 +124,11 @@ export default function DashboardPage() {
         navigate('/login'); 
     }
 
-    const handleFileChange = (e) => {
+    function handleFileChange(e) {
         setFile(e.target.files[0]);
     }
 
-    const exportPDF = () => {
+    function exportPDF() {
         html2canvas(document.getElementById('root'), {
             width: 1920,
             height: 1080,
@@ -146,7 +163,7 @@ export default function DashboardPage() {
                 <div style={{display:"flex"}}>
                     <div style={{display:"block"}}>
                         <h3 className="heading" style={{textAlign:"left", marginBottom:"10px", marginTop:"40px", marginLeft:"25px"}}>Dashboard</h3>
-                        <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome to your Energy Management Dashboard</p>
+                        <p style={{fontFamily:"Roboto-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome to your Energy Management Dashboard</p>
                     </div>
                     <div style={{display:"inline-block", marginTop:"35px", position:"fixed", right:"70px"}}>
                         <IconButton onClick={handleNotifVisibility} style={{border:'none', marginRight:'10px', marginBottom:'30px', background:'none'}}>
@@ -156,7 +173,7 @@ export default function DashboardPage() {
                             <img src={profileImageUrl} style={{width: '55px', height: '55px', borderRadius: '50%', border: '5px solid #04364A', objectFit: 'cover', display: 'block', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)'}}/>
                         </button>
                     </div>
-                    {vnotif && (
+                    {vNotif && (
                             <div style={{position: "absolute", top:"100px", right:"135px", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
                                 <h1 className="heading" style={{color:"#ffffff", marginBottom:"10px"}}>Notifications</h1>
                                 {notifications.map((notif) => (
@@ -164,7 +181,7 @@ export default function DashboardPage() {
                                 ))}
                             </div>
                         )}
-                    {vprof && (
+                    {vProf && (
                             <div style={{position: "fixed", top:"100px", right:"400px", zIndex: 100}}>
                                 <BoxProfile/>
                             </div>
@@ -173,23 +190,31 @@ export default function DashboardPage() {
                 <div>
                     <hr style={{width:"98%"}}></hr>
                 </div>
+                {userExists ? (
+                    <div style={{ marginLeft: '25px', marginTop: '20px' }}>
+                        <div>
+                            <button className="button" style={{width:"15%", position:"relative", left:"1200px", backgroundColor:"#F3DC8B"}}onClick={exportPDF}>Export as PDF</button>
+                        </div>
+                        <br/>
+                        <EnergyConsumptionChart userId={userId} userExists={userExists} />
+                    </div>
+                ) : (
+                    <div style={{marginTop: '100px' }}>
+                        <img src="data_not_found.png" style={{marginLeft:"660px"}}></img>
+                        <p style={{color:"#04364A", fontFamily:"Roboto-Bold, Helvetica", fontSize:"20px", fontWeight:"600", textAlign:"center"}}>Data not Found, <br/>Add One!</p>
+                        <form style={{marginLeft:"560px"}} onSubmit={handleFileUpload}>
+                            
+                            <input 
+                                id="file-upload" 
+                                type="file" 
+                                accept=".csv"
+                                onChange={handleFileChange}
+                            />
+                            <button style={{width:"15%", backgroundColor:"#F3DC8B"}} className="button" type="submit">UPLOAD</button>
+                        </form>
+                    </div>
+                )}
 
-                <button onClick={exportPDF}>Export as PDF</button>
-
-                <div style={{ marginLeft: '25px', marginTop: '20px' }}>
-                {/* <form onSubmit={handleFileUpload}>
-                    <input 
-                        type="file" 
-                        accept=".csv"
-                        onChange={handleFileChange}
-                    />
-                    <button type="submit">Upload CSV</button>
-                </form> */}
-
-                <div>
-                    <EnergyConsumptionChart userId={userId} />
-                </div>
-            </div>
             </div>
         </div>
     );
