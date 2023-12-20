@@ -24,12 +24,10 @@
 
 .nav-list li a.active {
     color: #fff; 
-    border-radius: 20px;
     background-color: #73D2F8; 
 }
 
 .nav-list li a:hover {
-    border-radius: 20px;
     background-color: #73d2f8ae; 
 }
 

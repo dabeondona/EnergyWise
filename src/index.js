@@ -10,10 +10,11 @@ import PricingPage from './PricingPage';
 import PrivateRoute from './PrivateRoute';
 import reportWebVitals from './reportWebVitals';
 import RegistrationPage from './RegistrationPage';
-import AdminDashboard from './AdminDashboard';
 import UserListPage from './UserListPage';
+import AdminTipsPage from './AdminTipsPage'
 import { AuthProvider } from './context/AuthProvider';
 import ContactPage from './ContactPage';
+import TipsPage from './TipsPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -31,11 +32,14 @@ root.render(
           </PrivateRoute>} />
         <Route path="/about-us" element={<Aboutus />} />
         <Route path="/registration" element={<RegistrationPage />} />
-        <Route path="/admin-dashboard" element={ <PrivateRoute>
-          <AdminDashboard />
-          </PrivateRoute>} />
         <Route path="/user-lists" element={<PrivateRoute>
           <UserListPage/>
+        </PrivateRoute>} />
+        <Route path="/admin-tips" element={<PrivateRoute>
+          <AdminTipsPage/>
+        </PrivateRoute>} />
+        <Route path="/energy-tips" element={<PrivateRoute>
+          <TipsPage/>
         </PrivateRoute>} />
       </Routes>
     </BrowserRouter>

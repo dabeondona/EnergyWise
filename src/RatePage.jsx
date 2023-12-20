@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import AuthContext from "./context/AuthProvider";
+import { AuthContext } from "./context/AuthProvider";
 import { useNavigate, NavLink } from 'react-router-dom';
 import axios from 'axios';
 import "./css/LP-Styling.css"
@@ -79,7 +79,7 @@ export default function RatePage() {
                     <li><NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink></li>
                     <li><NavLink to="/rate" activeClassName="active">Rate</NavLink></li>
                     <li><NavLink to="/calendar" activeClassName="active">Calendar</NavLink></li>
-                    <li><NavLink to="/tips" activeClassName="active">Tips</NavLink></li>
+                    <li><NavLink to="/energy-tips" activeClassName="active">Tips</NavLink></li>
                     <li><NavLink to="/goals" activeClassName="active">Goals</NavLink></li>
                     <hr style={{marginTop:"400px"}}></hr>
                     <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>

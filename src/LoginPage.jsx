@@ -1,5 +1,5 @@
 import React, {useState, useRef, useContext} from "react";
-import AuthContext from "./context/AuthProvider";
+import { AuthContext } from "./context/AuthProvider";
 import {useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 import "./css/LP-Styling.css";
@@ -28,7 +28,7 @@ export default function LoginPage() {
 
             localStorage.setItem('token', adminLoginResponse.data.jwtToken);
             setAuth(true);
-            navigate('/admin-dashboard'); // Redirect to admin dashboard
+            navigate('/user-lists'); // Redirect to admin dashboard
 
         } catch (adminError) {
             if (adminError.response && adminError.response.status === 401) {
