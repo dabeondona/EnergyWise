@@ -1,0 +1,85 @@
+.calendar {
+  width: 600px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0px;
+}
+
+.day-label {
+  text-align: center;
+  padding: 60px;
+  color: #333; /* Color for day labels */
+}
+
+.day-label-r {
+  text-align: center;
+  padding: 50px;
+  color: #ff0404; /* Color for day labels */
+}
+
+.day {
+  text-align: center;
+  padding: 20px;
+  border: 1px solid #ccc; /* Add a border to each day */
+}
+
+.day.outside-month {
+  color: #ccc;
+}
+
+.day.today {
+  background-color: #ec2020;
+}
+
+.day:hover {
+  background-color: #ff0404;
+}
+
+.day-label {
+  border: none;
+}
+
+
+@media (max-width: 600px) {
+  .calendar {
+    width: 100%;
+  }
+
+.event-form button {
+  background-color: #ec2020;
+  color: #fff;
+  border: none;
+  align-items: center;
+  padding: 20px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.event-form button:hover {
+  background-color: #ff0404;
+}
+
+}
