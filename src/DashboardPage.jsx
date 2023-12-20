@@ -40,6 +40,7 @@ export default function DashboardPage() {
         }
     }, [userId]);
 
+
     useEffect(() => {
         if(!auth) {
             navigate('/login');

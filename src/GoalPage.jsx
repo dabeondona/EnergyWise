@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { IconButton } from '@mui/material';
 import axios from 'axios';
-import "./css/LP-Styling.css";
-import "./css/R-Styling.css";
-import './css/GP-Styling.css';
+import React, { useContext, useEffect, useState } from 'react';
 import DatePicker from 'react-datepicker'; // Import the date picker component
 import 'react-datepicker/dist/react-datepicker.css'; // Import the default styles
+import { NavLink, useNavigate } from 'react-router-dom';
+import BoxProfile from './BoxProfile';
+import { AuthContext } from "./context/AuthProvider";
+import './css/GP-Styling.css';
+import "./css/LP-Styling.css";
+import "./css/R-Styling.css";
 
 const NotificationItem = ({ message }) => (
   <div className="notification-item" style={{backgroundColor:"#73D2F8", margin:"10px", padding:"10px", borderRadius:"10px"}}>
@@ -14,32 +18,93 @@ const NotificationItem = ({ message }) => (
 );
  
 export default function GoalPage() {
+  let navigate = useNavigate();
   const [goals, setGoals] = useState([]);
   const [newGoal, setNewGoal] = useState('');
+  const [userExists, setUserExists] = useState(false);
+
   const [editingGoal, setEditingGoal] = useState(null);
   const userDetails = JSON.parse(localStorage.getItem('userDetails')); // userDetails.firstName, lastName, email, username
   const [inputtedValue2, setInputtedValue2] = useState(''); // Add separate state for each input
   const [goalForToday, setGoalForToday] = useState('');
   const [toDoContents, setToDoContents] = useState([]); // Add state for To Do contents
   const [selectedDate, setSelectedDate] = useState(new Date()); // State to hold the selected date
-  const [vnotif, setVNotif] = useState(false);
+  const [vNotif, setVNotif] = useState(false);
+  const { auth, setAuth } = useContext(AuthContext);
+
+  const [vProf, setVProf] = useState(false);
+  const [profileImageUrl, setProfileImageUrl] = useState('');
+
  
   useEffect(() => {
     fetchGoals();
   }, []);
 
+  let userId = userDetails?.id; 
+    useEffect(() => {
+        if(userId) {
+            fetchPicture(userId);
+        }
+    }, [userId]);
+
+
+    useEffect(() => {
+        if(!auth) {
+            navigate('/login');
+        } 
+    }, [auth, navigate]);
+
+    useEffect(() => {
+        if(userId) {
+            userExistsChecker(userId);
+        }
+    }, [userId]);
+
   function handleNotifVisibility() {
-    if(!vnotif) {
+    if(!vNotif) {
         setVNotif(true);
     } else {
         setVNotif(false);
     }
 }
+
+function handleProfVisibility() {
+  if(!vProf) {
+      setVProf(true);
+  } else {
+      setVProf(false);
+  }
+}
+
 const [notifications, setNotifications] = useState([
   { id: 1, message: "Notification 1" },
   { id: 2, message: "Notification 2" },
 ]);
   
+
+const userExistsChecker = async (userId) => {
+  try {
+      const response = await axios.get(`http://localhost:8080/energyTable/user/check/${userId}`);
+      setUserExists(response.data); 
+      console.log("User exists:", response.data);
+  } catch(error) {
+      console.error('Error checking user:', error);
+  }
+};
+
+const fetchPicture = async (userId) => {
+  try {
+      const response = await axios.get(`http://localhost:8080/user/${userId}/picture`, {
+          responseType: 'blob'
+      });
+
+      const imageUrl = URL.createObjectURL(response.data);
+      setProfileImageUrl(imageUrl); 
+  } catch(error) {
+      console.error('Error fetching the picture:', error);
+      setProfileImageUrl(''); 
+  }       
+}
  
   const fetchGoals = async () => {
     try {
@@ -71,6 +136,12 @@ const [notifications, setNotifications] = useState([
   const handleInputChange = (event) => {
     setNewGoal(event.target.value);
   };
+
+  function handleLogout() {
+    localStorage.clear(); 
+    setAuth(false); 
+    navigate('/login'); 
+}
  
   const insertGoal = async () => {
     if (newGoal.trim() !== '') {
@@ -134,28 +205,37 @@ const [notifications, setNotifications] = useState([
         </ul>
       </div>
       <div style={{marginLeft:"300px"}}>
-                <div style={{display:"flex", flex:"1"}}>
-                    <div>
-                        <h3 className="heading" style={{textAlign:"left", marginBottom:"10px", marginTop:"40px", marginLeft:"25px"}}>Energy Rate</h3>
-                        <p style={{fontFamily:"Robot-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
+                <div style={{display:"flex"}}>
+                    <div style={{display:"block"}}>
+                        <h3 className="heading" style={{textAlign:"left", marginBottom:"10px", marginTop:"40px", marginLeft:"25px"}}>Goals</h3>
+                        <p style={{fontFamily:"Roboto-Medium, Helvetica", fontWeight:"550", fontSize:"12.5px", color:"#04364A", marginLeft:"25px"}}>Hi, Welcome {userDetails.firstName} {userDetails.lastName}!</p>
                     </div>
-                    <div style={{marginLeft:"30px",  marginTop:"45px", position:"relative", left:"70%"}}>
-                        <button onClick={handleNotifVisibility} style={{border:'none', padding:'0px', margin:'0px'}}>
-                            <img src="testnotif.png" style={{height: '50px' }}/>
+                    <div style={{display:"inline-block", marginTop:"35px", position:"fixed", right:"70px"}}>
+                        <IconButton onClick={handleNotifVisibility} style={{border:'none', marginRight:'10px', marginBottom:'30px', background:'none'}}>
+                            <NotificationsIcon sx={{ color: '#04364A' }} style={{height: '55px', display: 'block'}} fontSize="large"/>
+                        </IconButton>
+                        <button onClick={handleProfVisibility} style={{border:'none', padding:'0px', margin:'0px', background:"none"}}>
+                            <img src={profileImageUrl} style={{width: '55px', height: '55px', borderRadius: '50%', border: '5px solid #04364A', objectFit: 'cover', display: 'block', boxShadow: '0px 0px 10px rgba(0, 0, 0, 0.5)'}}/>
                         </button>
-                        <button>Profile</button>
-                        {vnotif && (
-                            <div className="notification-container" style={{position: "absolute", top:"45px", right:"0", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
+                    </div>
+                    {vNotif && (
+                            <div style={{position: "absolute", top:"100px", right:"135px", backgroundColor:"#808080", paddingTop:"10px", paddingRight:"25px", paddingLeft:"25px", paddingBottom:"10px", borderRadius:"20px", zIndex: 100}}>
                                 <h1 className="heading" style={{color:"#ffffff", marginBottom:"10px"}}>Notifications</h1>
                                 {notifications.map((notif) => (
                                     <NotificationItem key={notif.id} message={notif.message} />
                                 ))}
                             </div>
                         )}
-                    </div>
+                    {vProf && (
+                            <div style={{position: "fixed", top:"100px", right:"400px", zIndex: 100}}>
+                                <BoxProfile/>
+                            </div>
+                        )}
                 </div>
-                <hr style={{width:"96%"}}></hr>
-            </div>
+                <div>
+                    <hr style={{width:"98%"}}></hr>
+                </div>
+                </div>
       <div className="goal-info-container-1">
         <div className="goal-info-card-1" style={{ paddingBottom: "270px", marginLeft: "290px", marginBottom: "295px", height:"400px",maxHeight: "400px", overflowY: "auto" }}>
           <h3 className="heading" style={{ textAlign: "left" }}>To Do</h3>
