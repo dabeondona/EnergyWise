@@ -1,0 +1,91 @@
+.goal-info-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.goal-info-container {
+    width: 100%;
+    max-width: 600px;
+}
+hr {
+    margin: 1rem 0;
+    color: inherit;
+    border: 0;
+    border-top: var(--bs-border-width) solid;
+    opacity: .25;
+}
+.goal-info-container-1 {
+    width: 100%;
+    max-width: 695px;
+}
+.goal-info-card-1 {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.goal-info-container-2 {
+    width: 100%;
+    max-width: 480px;
+    margin-left: 450px;
+}
+.goal-info-card-2 {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 230px;
+}
+ 
+.delete-button{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: #73D2F8;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 2px 5px;
+}
+.edit-button{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: #73D2F8;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 2px 5px;
+}
+.update-button{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: #73D2F8;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 2px 5px;
+}
+.cancel-button{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    background-color: #73D2F8;
+    color: white;
+    margin-left: 5px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 2px 5px;
+}
