@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from "./context/AuthProvider";
 import "./css/LP-Styling.css";
 
 export default function LoginPage() {
-    const { setAuth } = useContext(AuthContext);
+    const { auth, setAuth } = useContext(AuthContext);
     let navigate = useNavigate();
 
     const userRef = useRef();
@@ -14,6 +14,13 @@ export default function LoginPage() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
+
+    useEffect(() => {
+        if (auth) {
+          navigate('/dashboard', { replace: true });
+    
+        }
+      }, [auth, navigate]);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -27,7 +34,7 @@ export default function LoginPage() {
             localStorage.setItem('token', adminLoginResponse.data.jwtToken);
             await fetchAdminDetails(username);
             setAuth(true);
-            navigate('/admin-dashboard');
+            navigate('/user-lists'); // Redirect to admin dashboard
 
         } catch(adminError) {
             if ((adminError.response && adminError.response.status === 401) || (adminError.response && adminError.response.status === 404)) {

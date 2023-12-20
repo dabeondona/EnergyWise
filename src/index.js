@@ -2,10 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Aboutus from './Aboutus';
-import AdminDashboard from './AdminDashboard';
+import AdminTipsPage from './AdminTipsPage';
 import CalendarPage from './CalendarPage';
 import ContactPage from './ContactPage';
 import DashboardPage from './DashboardPage';
+import GoalPage from './GoalPage';
 import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
 import PasswordUpdatePage from './PasswordUpdatePage';
@@ -19,6 +20,7 @@ import UserListPage from './UserListPage';
 import { AuthProvider } from './context/AuthProvider';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -52,16 +54,19 @@ root.render(
         <Route path="/updatepassword" element={<PrivateRoute>
           <PasswordUpdatePage />
           </PrivateRoute>} />
-
-
-
-
-
-        <Route path="/admin-dashboard" element={ <PrivateRoute>
-          <AdminDashboard />
+        <Route path="/goals" element={<PrivateRoute>
+          <GoalPage />
           </PrivateRoute>} />
+
+
+
+        <Route path="/about-us" element={<Aboutus />} />
+        <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/user-lists" element={<PrivateRoute>
           <UserListPage/>
+        </PrivateRoute>} />
+        <Route path="/admin-tips" element={<PrivateRoute>
+          <AdminTipsPage/>
         </PrivateRoute>} />
       </Routes>
     </BrowserRouter>

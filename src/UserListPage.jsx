@@ -25,7 +25,7 @@ export default function UserList() {
         return (
             <div>
                 <h2>User List</h2>
-                <hr />
+                <br/>
                 <div className="user-table-container">
                     <table className="user-table">
                         <thead>
@@ -34,7 +34,6 @@ export default function UserList() {
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,11 +43,7 @@ export default function UserList() {
                                     <td>{user.firstname}</td>
                                     <td>{user.lastname}</td>
                                     <td>{user.email}</td>
-                                    <td>
-                                        {/* Action button/link for each user */}
-                                        <NavLink to={`/user/${user.id}`} activeClassName="active">View</NavLink>
-                                        {/* Replace `/user/${user.id}` with your user detail route */}
-                                    </td>
+                                   
                                 </tr>
                             ))}
                         </tbody>
@@ -60,22 +55,22 @@ export default function UserList() {
 
 
     return (
-        <div className="main">
+        <div className="admin-content">
+            <p className='header-admin'>Welcome, admin!</p>
+                <hr /> 
             <div className="navigation">
                 <img src="energywise_logo.png" alt="Logo" width="170px" style={{ marginLeft: "25px", marginBottom: "50px" }} />
                 <ul className="nav-list">
-                    <li><NavLink to="/dashboard" activeClassName="active">Dashboard</NavLink></li>
                     <li><NavLink to="/user-lists" activeClassName="active">Users</NavLink></li>
-                    <li><NavLink to="/calendar" activeClassName="active">Calendar</NavLink></li>
-                    <li><NavLink to="/tips" activeClassName="active">Tips</NavLink></li>
-                    <li><NavLink to="/goals" activeClassName="active">Goals</NavLink></li>
-                    <hr style={{ marginTop: "400px" }}></hr>
+                    <li><NavLink to="/admin-tips" activeClassName="active">Tips</NavLink></li>
                     <li><NavLink to="/login" activeClassName="active">Logout</NavLink></li>
                 </ul>
             </div>
             <div className="user-list-container">
                 <UserTable />
-            </div>
+            </div>      
         </div>
+
+        
     );
 }
