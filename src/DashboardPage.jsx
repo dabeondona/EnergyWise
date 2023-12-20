@@ -160,6 +160,7 @@ export default function DashboardPage() {
                     <li><NavLink to="/login" onClick={handleLogout} activeClassName="active">Logout</NavLink></li>
                 </ul>
             </div>
+            
             <div style={{marginLeft:"300px"}}>
                 <div style={{display:"flex"}}>
                     <div style={{display:"block"}}>
