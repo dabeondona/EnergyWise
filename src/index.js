@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Aboutus from './Aboutus';
+import AdminTipsPage from './AdminTipsPage';
 import CalendarPage from './CalendarPage';
 import ContactPage from './ContactPage';
 import DashboardPage from './DashboardPage';
+import GoalPage from './GoalPage';
 import LandingPage from './LandingPage';
 import LoginPage from './LoginPage';
 import PasswordUpdatePage from './PasswordUpdatePage';
@@ -15,12 +17,9 @@ import RatePage from './RatePage';
 import RegistrationPage from './RegistrationPage';
 import TestPage from './TestPage';
 import UserListPage from './UserListPage';
-import AdminTipsPage from './AdminTipsPage'
 import { AuthProvider } from './context/AuthProvider';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
-import ContactPage from './ContactPage';
-import TipsPage from './TipsPage';
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -55,6 +54,9 @@ root.render(
         <Route path="/updatepassword" element={<PrivateRoute>
           <PasswordUpdatePage />
           </PrivateRoute>} />
+        <Route path="/goals" element={<PrivateRoute>
+          <GoalPage />
+          </PrivateRoute>} />
 
 
 
@@ -65,9 +67,6 @@ root.render(
         </PrivateRoute>} />
         <Route path="/admin-tips" element={<PrivateRoute>
           <AdminTipsPage/>
-        </PrivateRoute>} />
-        <Route path="/energy-tips" element={<PrivateRoute>
-          <TipsPage/>
         </PrivateRoute>} />
       </Routes>
     </BrowserRouter>
