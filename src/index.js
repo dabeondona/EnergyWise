@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Aboutus from './Aboutus';
-import AdminDashboard from './AdminDashboard';
 import CalendarPage from './CalendarPage';
 import ContactPage from './ContactPage';
 import DashboardPage from './DashboardPage';
@@ -16,9 +15,13 @@ import RatePage from './RatePage';
 import RegistrationPage from './RegistrationPage';
 import TestPage from './TestPage';
 import UserListPage from './UserListPage';
+import AdminTipsPage from './AdminTipsPage'
 import { AuthProvider } from './context/AuthProvider';
 import './css/index.css';
 import reportWebVitals from './reportWebVitals';
+import ContactPage from './ContactPage';
+import TipsPage from './TipsPage';
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -55,13 +58,16 @@ root.render(
 
 
 
-
-
-        <Route path="/admin-dashboard" element={ <PrivateRoute>
-          <AdminDashboard />
-          </PrivateRoute>} />
+        <Route path="/about-us" element={<Aboutus />} />
+        <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/user-lists" element={<PrivateRoute>
           <UserListPage/>
+        </PrivateRoute>} />
+        <Route path="/admin-tips" element={<PrivateRoute>
+          <AdminTipsPage/>
+        </PrivateRoute>} />
+        <Route path="/energy-tips" element={<PrivateRoute>
+          <TipsPage/>
         </PrivateRoute>} />
       </Routes>
     </BrowserRouter>

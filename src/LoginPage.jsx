@@ -27,7 +27,7 @@ export default function LoginPage() {
             localStorage.setItem('token', adminLoginResponse.data.jwtToken);
             await fetchAdminDetails(username);
             setAuth(true);
-            navigate('/admin-dashboard');
+            navigate('/user-lists'); // Redirect to admin dashboard
 
         } catch(adminError) {
             if ((adminError.response && adminError.response.status === 401) || (adminError.response && adminError.response.status === 404)) {
