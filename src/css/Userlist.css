@@ -2,8 +2,9 @@
 
 
   .user-list-container {
+    display: flex;
     margin: 0 auto;
-    padding: 20px;
+    margin-left: 20%;
   }
   
   /* User Table Styling */
@@ -26,12 +27,13 @@
   }
   
   .user-table th {
-    background-color: #f2f2f2;
+    background-color: #73D2F8;
     font-weight: bold;
+    color: #fff;
   }
   
   .user-table tbody tr:hover {
-    background-color: #f9f9f9;
+    background-color: #F5FCFF;
   }
   
   .user-table td a {
@@ -46,4 +48,5 @@
   .user-table td a:hover {
     background-color: #0056b3;
   }
+  
   
